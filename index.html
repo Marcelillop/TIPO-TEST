@@ -1,16 +1,23 @@
 <!DOCTYPE html>
 <html lang="es">
-<link rel="stylesheet" href="style.css">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quiz</title>
+    <title>Test Bases de Datos</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
     <div id="quiz-container">
         <p id="progreso"></p>
+        <p id="cronometro">Tiempo: 00:00</p>
+
         <h2 id="pregunta"></h2>
+
         <div id="opciones"></div>
+
+        <div id="explicacion" style="display: none;"></div>
+
         <button id="btn-siguiente" style="display: none;">Siguiente</button>
 
         <div id="resultado" style="display: none;">
