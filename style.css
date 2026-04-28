@@ -6,21 +6,20 @@
 body {
     margin: 0;
     min-height: 100vh;
-    background-image: url("./negro.jpg"); 
-    background-size: 250px;
+    background: linear-gradient(135deg, #e3f2fd, #bbdefb, #90caf9);
+
     display: flex;
     justify-content: center;
     align-items: center;
-    color: #222;
 }
 
 #quiz-container {
     width: 90%;
-    max-width: 750px;
-    background: white;
+    max-width: 800px;
+    background: #ffffff;
     padding: 35px;
-    border-radius: 20px;
-    box-shadow: 0 15px 40px rgba(0,0,0,0.25);
+    border-radius: 22px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.15);
 }
 
 #progreso {
