@@ -79,3 +79,20 @@ body {
     font-size: 26px;
     font-weight: bold;
 }
+
+#opciones button.correcta {
+    background-color: #2e7d32 !important;
+    color: white;
+    border-color: #2e7d32;
+}
+
+#opciones button.incorrecta {
+    background-color: #c62828 !important;
+    color: white;
+    border-color: #c62828;
+}
+
+#opciones button:disabled {
+    cursor: not-allowed;
+    opacity: 0.9;
+}
