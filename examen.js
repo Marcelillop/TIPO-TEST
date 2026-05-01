@@ -1,5 +1,5 @@
-const preguntas = [
-    {
+let preguntas = [
+      {
         pregunta: "¿Qué elemento especial permite recorrer los registros de un fichero encadenado en un orden concreto?",
         opciones: ["Índices", "Punteros", "Huecos", "Claves"],
         correcta: 1,
@@ -301,12 +301,20 @@ const preguntas = [
     }
 ];
 
+let preguntasOriginales = [...preguntas];
+
 let indiceActual = 0;
 let puntaje = 0;
 let respondido = false;
-
 let segundos = 0;
 let intervaloCronometro;
+let modoRandom = false;
+
+const menuInicial = document.getElementById("menu-inicial");
+const quizContainer = document.getElementById("quiz-container");
+
+const btnIniciar = document.getElementById("btn-iniciar");
+const btnRandom = document.getElementById("btn-random");
 
 const progreso = document.getElementById("progreso");
 const cronometro = document.getElementById("cronometro");
@@ -317,6 +325,10 @@ const btnSiguiente = document.getElementById("btn-siguiente");
 const resultado = document.getElementById("resultado");
 const puntajeFinal = document.getElementById("puntaje-final");
 const btnReiniciar = document.getElementById("btn-reiniciar");
+
+function mezclarPreguntas(array) {
+    return [...array].sort(() => Math.random() - 0.5);
+}
 
 function iniciarCronometro() {
     clearInterval(intervaloCronometro);
@@ -345,8 +357,11 @@ function mostrarPregunta() {
 
     actual.opciones.forEach((opcion, index) => {
         const boton = document.createElement("button");
+        boton.type = "button";
         boton.textContent = opcion;
+
         boton.addEventListener("click", () => seleccionarRespuesta(index));
+
         opciones.appendChild(boton);
     });
 }
@@ -382,16 +397,6 @@ function seleccionarRespuesta(index) {
     btnSiguiente.style.display = "block";
 }
 
-btnSiguiente.addEventListener("click", () => {
-    indiceActual++;
-
-    if (indiceActual < preguntas.length) {
-        mostrarPregunta();
-    } else {
-        mostrarResultado();
-    }
-});
-
 function mostrarResultado() {
     clearInterval(intervaloCronometro);
 
@@ -410,7 +415,9 @@ function mostrarResultado() {
         `${puntaje}/${preguntas.length} correctas | Tiempo total: ${tiempoFinal}`;
 }
 
-btnReiniciar.addEventListener("click", () => {
+btnIniciar.addEventListener("click", (e) => {
+    e.preventDefault();
+
     indiceActual = 0;
     puntaje = 0;
     segundos = 0;
@@ -418,16 +425,75 @@ btnReiniciar.addEventListener("click", () => {
 
     cronometro.textContent = "Tiempo: 00:00";
 
+    if (modoRandom) {
+        preguntas = mezclarPreguntas(preguntasOriginales);
+    } else {
+        preguntas = [...preguntasOriginales];
+    }
+
+    menuInicial.style.display = "none";
+    quizContainer.style.display = "block";
+    resultado.style.display = "none";
+
     progreso.style.display = "block";
     cronometro.style.display = "block";
     pregunta.style.display = "block";
     opciones.style.display = "grid";
-    explicacion.style.display = "none";
-    resultado.style.display = "none";
 
     iniciarCronometro();
     mostrarPregunta();
 });
 
-iniciarCronometro();
-mostrarPregunta();
+btnRandom.addEventListener("click", (e) => {
+    e.preventDefault();
+
+    modoRandom = !modoRandom;
+
+    btnRandom.textContent =
+        modoRandom ? "Modo random: ON" : "Modo random: OFF";
+
+    btnRandom.classList.toggle("activo", modoRandom);
+});
+
+btnSiguiente.addEventListener("click", (e) => {
+    e.preventDefault();
+
+    indiceActual++;
+
+    if (indiceActual < preguntas.length) {
+        mostrarPregunta();
+    } else {
+        mostrarResultado();
+    }
+});
+
+btnReiniciar.addEventListener("click", (e) => {
+    e.preventDefault();
+
+    indiceActual = 0;
+    puntaje = 0;
+    segundos = 0;
+    respondido = false;
+
+    cronometro.textContent = "Tiempo: 00:00";
+
+    if (modoRandom) {
+        preguntas = mezclarPreguntas(preguntasOriginales);
+    } else {
+        preguntas = [...preguntasOriginales];
+    }
+
+    resultado.style.display = "none";
+
+    progreso.style.display = "block";
+    cronometro.style.display = "block";
+    pregunta.style.display = "block";
+    opciones.style.display = "grid";
+
+    iniciarCronometro();
+    mostrarPregunta();
+});
+
+// Estado inicial
+menuInicial.style.display = "block";
+quizContainer.style.display = "none";
