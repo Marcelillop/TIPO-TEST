@@ -301,7 +301,105 @@ let preguntas = [
     }
 ];
 
+let preguntasHardware = [
+    {
+        pregunta: "¿La herramienta duplicity está preparada para clonar una carpeta concreta?",
+        opciones: ["Verdadero", "Falso"],
+        correcta: 0,
+        explicacion: "Duplicity permite hacer copias de seguridad de carpetas concretas."
+    },
+    {
+        pregunta: "Una copia de seguridad que sólo toma en cuenta los datos que han variado desde la última copia de respaldo realizada se conoce como:",
+        opciones: ["Diferencial", "Completa", "Incremental"],
+        correcta: 2,
+        explicacion: "La copia incremental solo guarda los cambios desde la última copia realizada."
+    },
+    {
+        pregunta: "Con la herramienta duplicity, antes de indicar la ruta de un sistema de archivos local, se usa la notación:",
+        opciones: ["file:", "file:/", "file://", "file:///"],
+        correcta: 3,
+        explicacion: "Duplicity utiliza la notación file:/// para rutas locales."
+    },
+    {
+        pregunta: "La copia de seguridad implementada con Clonezilla era de tipo:",
+        opciones: ["Completa", "Diferencial", "Incremental", "Espejo"],
+        correcta: 0,
+        explicacion: "Clonezilla realiza copias completas del sistema."
+    },
+    {
+        pregunta: "En una agrupación RAID 1 implementada con cuatro discos físicos, el espacio aprovechado es:",
+        opciones: ["50%", "25%", "100%", "40%"],
+        correcta: 1,
+        explicacion: "RAID 1 replica la información; con 4 discos solo se aprovecha un 25%."
+    },
+    {
+        pregunta: "A la hora de implementar una agrupación RAID con mdadm, el formato de los discos:",
+        opciones: [
+            "Tiene lugar después de crear la matriz",
+            "Tiene lugar en el momento de crear la matriz",
+            "Tiene lugar antes de crear la matriz",
+            "Se invoca por separado para cada uno de ellos"
+        ],
+        correcta: 0,
+        explicacion: "La matriz se crea primero y después se formatea."
+    },
+    {
+        pregunta: "Por término general, la operación de restauración lleva más tiempo en la modalidad de volcado:",
+        opciones: ["Incremental", "Completo", "Diferencial"],
+        correcta: 0,
+        explicacion: "La restauración incremental requiere aplicar varias copias consecutivas."
+    },
+    {
+        pregunta: "Señala la afirmación cierta en relación al asistente de Clonezilla:",
+        opciones: [
+            "Es capaz de preparar por completo el disco donde depositaremos la imagen",
+            "Obliga a la compactación de la imagen",
+            "Obliga a la verificación del sistema de archivos",
+            "Obliga al cifrado de la imagen",
+            "Obliga a la verificación de la imagen generada"
+        ],
+        correcta: 0,
+        explicacion: "Clonezilla puede preparar completamente el disco destino."
+    },
+    {
+        pregunta: "Opción de mdadm para indicar el nombre de la matriz generada:",
+        opciones: ["-C", "-n", "-l"],
+        correcta: 0,
+        explicacion: "-C se usa para crear la matriz RAID."
+    },
+    {
+        pregunta: "En relación a las características de duplicity, sabemos que el volcado incremental puede ser realizado:",
+        opciones: ["Verdadero", "Falso"],
+        correcta: 0,
+        explicacion: "Duplicity soporta copias incrementales."
+    },
+    {
+        pregunta: "Una copia de seguridad que toma todos los datos modificados desde la última copia completa realizada se conoce como:",
+        opciones: ["RAID 0", "Completa", "Diferencial", "Incremental"],
+        correcta: 2,
+        explicacion: "La copia diferencial guarda todos los cambios desde la última copia completa."
+    }
+];
+
 let preguntasOriginales = [...preguntas];
+
+const bancosTests = [
+    {
+        nombre: "Bases de Datos",
+        preguntas: preguntasOriginales
+    },
+    {
+        nombre: "Hardware",
+        preguntas: preguntasHardware
+    }
+];
+
+const btnAnterior = document.getElementById("btn-anterior");
+const btnSiguienteTest = document.getElementById("btn-siguiente-test");
+const nombreTest = document.getElementById("nombre-test");
+const cantidadPreguntas = document.getElementById("cantidad-preguntas");
+
+let testSeleccionado = 0;
 
 let indiceActual = 0;
 let puntaje = 0;
@@ -322,11 +420,16 @@ const btnIniciar = document.getElementById("btn-iniciar");
 const btnRandom = document.getElementById("btn-random");
 const btnExamen = document.getElementById("btn-examen");
 const btnSiguiente = document.getElementById("btn-siguiente");
+const btnSalir = document.getElementById("btn-salir");
 const btnMenu = document.getElementById("btn-menu");
 
 const btnVerHistorial = document.getElementById("btn-ver-historial");
 const btnVolverMenu = document.getElementById("btn-volver-menu");
 const btnBorrarHistorial = document.getElementById("btn-borrar-historial");
+
+const modalPendiente = document.getElementById("modal-pendiente");
+const btnContinuarPendiente = document.getElementById("btn-continuar-pendiente");
+const btnDescartarPendiente = document.getElementById("btn-descartar-pendiente");
 
 const progreso = document.getElementById("progreso");
 const cronometro = document.getElementById("cronometro");
@@ -336,6 +439,12 @@ const explicacion = document.getElementById("explicacion");
 const resultado = document.getElementById("resultado");
 const puntajeFinal = document.getElementById("puntaje-final");
 const contenidoHistorial = document.getElementById("contenido-historial");
+
+function actualizarSelectorTest() {
+    const test = bancosTests[testSeleccionado];
+    nombreTest.textContent = test.nombre;
+    cantidadPreguntas.textContent = `${test.preguntas.length} preguntas`;
+}
 
 function mezclarPreguntas(array) {
     return [...array].sort(() => Math.random() - 0.5);
@@ -353,6 +462,45 @@ function iniciarCronometro() {
         cronometro.textContent =
             `Tiempo: ${String(minutos).padStart(2, "0")}:${String(segs).padStart(2, "0")}`;
     }, 1000);
+}
+
+function iniciarNuevoTest() {
+    indiceActual = 0;
+    puntaje = 0;
+    fallos = 0;
+    segundos = 0;
+    historialFallos = [];
+    respuestaSeleccionada = null;
+
+    cronometro.textContent = "Tiempo: 00:00";
+
+    const bancoActual = bancosTests[testSeleccionado].preguntas;
+
+    if (modoExamen) {
+        preguntas = mezclarPreguntas(bancoActual).slice(
+            0,
+            Math.min(20, bancoActual.length)
+        );
+    } else {
+        preguntas = modoRandom
+            ? mezclarPreguntas(bancoActual)
+            : [...bancoActual];
+    }
+
+    menuInicial.style.display = "none";
+    historialGlobal.style.display = "none";
+    quizContainer.style.display = "block";
+
+    progreso.style.display = "block";
+    cronometro.style.display = "block";
+    pregunta.style.display = "block";
+    opciones.style.display = "grid";
+    explicacion.style.display = "none";
+    resultado.style.display = "none";
+    btnSalir.style.display = "inline-block";
+
+    iniciarCronometro();
+    mostrarPregunta();
 }
 
 function mostrarPregunta() {
@@ -401,8 +549,6 @@ function responderNormal(index) {
 }
 
 function seleccionarOpcion(index) {
-    if (!modoExamen) return;
-
     const botones = opciones.querySelectorAll("button");
 
     botones.forEach(btn =>
@@ -440,10 +586,7 @@ function corregirRespuesta() {
                 btn.classList.add("correcta");
             }
 
-            if (
-                i === respuestaSeleccionada &&
-                i !== correcta
-            ) {
+            if (i === respuestaSeleccionada && i !== correcta) {
                 btn.classList.add("incorrecta");
             }
         });
@@ -454,15 +597,25 @@ function corregirRespuesta() {
 }
 
 function calcularNota() {
-    let notaBase = (puntaje / preguntas.length) * 10;
-    let penalizacion = Math.floor(fallos / 3) * 0.33;
+    const notaBase = (puntaje / preguntas.length) * 10;
+    const penalizacion = Math.floor(fallos / 3) * 0.33;
 
     return Math.max(0, notaBase - penalizacion);
 }
 
+function obtenerClaveHistorialPorIndice(indice) {
+    const nombre = bancosTests[indice].nombre
+        .toLowerCase()
+        .replace(/\s+/g, "");
+
+    return `historial_${nombre}`;
+}
+
 function guardarIntento() {
+    const clave = obtenerClaveHistorialPorIndice(testSeleccionado);
+
     const historial =
-        JSON.parse(localStorage.getItem("historialTest")) || [];
+        JSON.parse(localStorage.getItem(clave)) || [];
 
     historial.push({
         fecha: new Date().toLocaleString(),
@@ -474,14 +627,80 @@ function guardarIntento() {
         errores: historialFallos
     });
 
+    localStorage.setItem(clave, JSON.stringify(historial));
+}
+
+function guardarIntentoPendiente() {
+    const clavePendiente = `intentoPendiente_${testSeleccionado}`;
+
+    const estado = {
+        testSeleccionado,
+        preguntas,
+        indiceActual,
+        puntaje,
+        fallos,
+        segundos,
+        modoExamen,
+        modoRandom,
+        historialFallos
+    };
+
     localStorage.setItem(
-        "historialTest",
-        JSON.stringify(historial)
+        clavePendiente,
+        JSON.stringify(estado)
     );
+}
+
+function cargarIntentoPendiente() {
+    const clavePendiente = `intentoPendiente_${testSeleccionado}`;
+
+    const estado = JSON.parse(
+    localStorage.getItem(clavePendiente)
+);
+
+    if (!estado) return;
+
+    testSeleccionado = estado.testSeleccionado;
+    preguntas = estado.preguntas;
+    indiceActual = estado.indiceActual;
+    puntaje = estado.puntaje;
+    fallos = estado.fallos;
+    segundos = estado.segundos;
+    modoExamen = estado.modoExamen;
+    modoRandom = estado.modoRandom;
+    historialFallos = estado.historialFallos;
+
+    actualizarSelectorTest();
+
+    btnRandom.textContent =
+        modoRandom ? "Modo random: ON" : "Modo random: OFF";
+
+    btnRandom.classList.toggle("activo", modoRandom);
+
+    btnExamen.textContent =
+        modoExamen ? "Modo examen: ON" : "Modo examen: OFF";
+
+    btnExamen.classList.toggle("activo", modoExamen);
+
+    cronometro.textContent =
+        `Tiempo: ${String(Math.floor(segundos / 60)).padStart(2, "0")}:${String(segundos % 60).padStart(2, "0")}`;
+
+    menuInicial.style.display = "none";
+    historialGlobal.style.display = "none";
+    quizContainer.style.display = "block";
+
+    btnSalir.style.display = "inline-block";
+
+    iniciarCronometro();
+    mostrarPregunta();
 }
 
 function mostrarResultado() {
     clearInterval(intervaloCronometro);
+
+   localStorage.removeItem(
+    `intentoPendiente_${testSeleccionado}`
+    );
 
     guardarIntento();
 
@@ -491,6 +710,7 @@ function mostrarResultado() {
     opciones.style.display = "none";
     explicacion.style.display = "none";
     btnSiguiente.style.display = "none";
+    btnSalir.style.display = "none";
 
     resultado.style.display = "block";
 
@@ -502,19 +722,29 @@ function mostrarResultado() {
     `;
 }
 
-function cargarHistorial() {
+function cargarHistorial(tipoTest) {
+    const clave =
+        tipoTest === "bd"
+            ? "historial_basesdedatos"
+            : "historial_hardware";
+
     const historial =
-        JSON.parse(localStorage.getItem("historialTest")) || [];
+        JSON.parse(localStorage.getItem(clave)) || [];
 
     contenidoHistorial.innerHTML = "";
 
+    if (historial.length === 0) {
+        contenidoHistorial.innerHTML =
+            "<p>No hay intentos guardados.</p>";
+        return;
+    }
+
     historial.forEach((intento, index) => {
-        const detallesId = `detalles-${index}`;
+        const detallesId = `detalle-${tipoTest}-${index}`;
 
         let html = `
             <div class="intento">
-                <button 
-                    class="btn-intento"
+                <button class="btn-intento"
                     onclick="toggleDetalles('${detallesId}')">
                     Intento ${index + 1}
                     ${intento.modoExamen ? "(Examen)" : ""}
@@ -537,10 +767,7 @@ function cargarHistorial() {
             `;
         });
 
-        html += `
-                </div>
-            </div>
-        `;
+        html += `</div></div>`;
 
         contenidoHistorial.innerHTML += html;
     });
@@ -555,29 +782,51 @@ function toggleDetalles(id) {
             : "none";
 }
 
+btnAnterior.addEventListener("click", () => {
+    testSeleccionado--;
+
+    if (testSeleccionado < 0) {
+        testSeleccionado = bancosTests.length - 1;
+    }
+
+    actualizarSelectorTest();
+});
+
+btnSiguienteTest.addEventListener("click", () => {
+    testSeleccionado++;
+
+    if (testSeleccionado >= bancosTests.length) {
+        testSeleccionado = 0;
+    }
+
+    actualizarSelectorTest();
+});
+
 btnIniciar.addEventListener("click", () => {
-    indiceActual = 0;
-    puntaje = 0;
-    fallos = 0;
-    segundos = 0;
-    historialFallos = [];
+    const pendiente =
+    localStorage.getItem(
+        `intentoPendiente_${testSeleccionado}`
+    );
 
-    preguntas = modoRandom
-        ? mezclarPreguntas(preguntasOriginales)
-        : [...preguntasOriginales];
+    if (pendiente) {
+        modalPendiente.style.display = "flex";
+        return;
+    }
 
-    menuInicial.style.display = "none";
-    historialGlobal.style.display = "none";
-    quizContainer.style.display = "block";
+    iniciarNuevoTest();
+});
 
-    progreso.style.display = "block";
-    cronometro.style.display = "block";
-    pregunta.style.display = "block";
-    opciones.style.display = "grid";
-    resultado.style.display = "none";
+btnContinuarPendiente.addEventListener("click", () => {
+    modalPendiente.style.display = "none";
+    cargarIntentoPendiente();
+});
 
-    iniciarCronometro();
-    mostrarPregunta();
+btnDescartarPendiente.addEventListener("click", () => {
+    localStorage.removeItem(
+    `intentoPendiente_${testSeleccionado}`
+    );
+    modalPendiente.style.display = "none";
+    iniciarNuevoTest();
 });
 
 btnRandom.addEventListener("click", () => {
@@ -586,7 +835,7 @@ btnRandom.addEventListener("click", () => {
     btnRandom.textContent =
         modoRandom ? "Modo random: ON" : "Modo random: OFF";
 
-    btnRandom.classList.toggle("activo");
+    btnRandom.classList.toggle("activo", modoRandom);
 });
 
 btnExamen.addEventListener("click", () => {
@@ -595,24 +844,14 @@ btnExamen.addEventListener("click", () => {
     btnExamen.textContent =
         modoExamen ? "Modo examen: ON" : "Modo examen: OFF";
 
-    btnExamen.classList.toggle("activo");
+    btnExamen.classList.toggle("activo", modoExamen);
 });
 
 btnSiguiente.addEventListener("click", () => {
+    if (modoExamen && respuestaSeleccionada === null) return;
+
     if (modoExamen) {
-        if (respuestaSeleccionada === null) return;
-
         corregirRespuesta();
-
-        indiceActual++;
-
-        if (indiceActual < preguntas.length) {
-            mostrarPregunta();
-        } else {
-            mostrarResultado();
-        }
-
-        return;
     }
 
     indiceActual++;
@@ -622,6 +861,17 @@ btnSiguiente.addEventListener("click", () => {
     } else {
         mostrarResultado();
     }
+});
+
+btnSalir.addEventListener("click", () => {
+    clearInterval(intervaloCronometro);
+
+    if (puntaje > 0 || fallos > 0 || indiceActual > 0) {
+        guardarIntentoPendiente();
+    }
+
+    quizContainer.style.display = "none";
+    menuInicial.style.display = "block";
 });
 
 btnMenu.addEventListener("click", () => {
@@ -634,7 +884,15 @@ btnVerHistorial.addEventListener("click", () => {
     menuInicial.style.display = "none";
     historialGlobal.style.display = "block";
 
-    cargarHistorial();
+    contenidoHistorial.innerHTML = `
+        <button onclick="cargarHistorial('bd')">
+            Historial Bases de Datos
+        </button>
+
+        <button onclick="cargarHistorial('hw')">
+            Historial Hardware
+        </button>
+    `;
 });
 
 btnVolverMenu.addEventListener("click", () => {
@@ -643,6 +901,19 @@ btnVolverMenu.addEventListener("click", () => {
 });
 
 btnBorrarHistorial.addEventListener("click", () => {
-    localStorage.removeItem("historialTest");
-    cargarHistorial();
+    localStorage.removeItem("historial_basesdedatos");
+    localStorage.removeItem("historial_hardware");
+
+    contenidoHistorial.innerHTML = `
+        <button onclick="cargarHistorial('bd')">
+            Historial Bases de Datos
+        </button>
+
+        <button onclick="cargarHistorial('hw')">
+            Historial Hardware
+        </button>
+    `;
 });
+
+actualizarSelectorTest();
+window.toggleDetalles = toggleDetalles;
