@@ -309,12 +309,15 @@ let respondido = false;
 let segundos = 0;
 let intervaloCronometro;
 let modoRandom = false;
+let modoExamen = false;
+let preguntasFalladas = [];
 
 const menuInicial = document.getElementById("menu-inicial");
 const quizContainer = document.getElementById("quiz-container");
 
 const btnIniciar = document.getElementById("btn-iniciar");
 const btnRandom = document.getElementById("btn-random");
+const btnExamen = document.getElementById("btn-examen");
 
 const progreso = document.getElementById("progreso");
 const cronometro = document.getElementById("cronometro");
@@ -325,6 +328,7 @@ const btnSiguiente = document.getElementById("btn-siguiente");
 const resultado = document.getElementById("resultado");
 const puntajeFinal = document.getElementById("puntaje-final");
 const btnReiniciar = document.getElementById("btn-reiniciar");
+const barraProgreso = document.getElementById("barra-progreso");
 
 function mezclarPreguntas(array) {
     return [...array].sort(() => Math.random() - 0.5);
@@ -344,6 +348,27 @@ function iniciarCronometro() {
     }, 1000);
 }
 
+function guardarRecord() {
+    const record = JSON.parse(localStorage.getItem("recordQuiz"));
+
+    const nuevoRecord = {
+        puntaje,
+        tiempo: segundos
+    };
+
+    if (
+        !record ||
+        puntaje > record.puntaje ||
+        (puntaje === record.puntaje && segundos < record.tiempo)
+    ) {
+        localStorage.setItem("recordQuiz", JSON.stringify(nuevoRecord));
+    }
+}
+
+function obtenerRecord() {
+    return JSON.parse(localStorage.getItem("recordQuiz"));
+}
+
 function mostrarPregunta() {
     respondido = false;
     btnSiguiente.style.display = "none";
@@ -355,13 +380,14 @@ function mostrarPregunta() {
     progreso.textContent = `Pregunta ${indiceActual + 1} de ${preguntas.length}`;
     pregunta.textContent = actual.pregunta;
 
+    const porcentaje = (indiceActual / preguntas.length) * 100;
+    barraProgreso.style.width = `${porcentaje}%`;
+
     actual.opciones.forEach((opcion, index) => {
         const boton = document.createElement("button");
         boton.type = "button";
         boton.textContent = opcion;
-
         boton.addEventListener("click", () => seleccionarRespuesta(index));
-
         opciones.appendChild(boton);
     });
 }
@@ -389,6 +415,10 @@ function seleccionarRespuesta(index) {
 
     if (index === correcta) {
         puntaje++;
+    } else if (modoExamen) {
+        puntaje -= 0.33;
+        if (puntaje < 0) puntaje = 0;
+        preguntasFalladas.push(actual.pregunta);
     }
 
     explicacion.textContent = actual.explicacion;
@@ -399,6 +429,10 @@ function seleccionarRespuesta(index) {
 
 function mostrarResultado() {
     clearInterval(intervaloCronometro);
+
+    barraProgreso.style.width = "100%";
+
+    guardarRecord();
 
     progreso.style.display = "none";
     cronometro.style.display = "none";
@@ -411,42 +445,47 @@ function mostrarResultado() {
 
     const tiempoFinal = cronometro.textContent.replace("Tiempo: ", "");
 
-    puntajeFinal.textContent =
-        `${puntaje}/${preguntas.length} correctas | Tiempo total: ${tiempoFinal}`;
+    puntajeFinal.innerHTML =
+        `${puntaje.toFixed(2)}/${preguntas.length} correctas | Tiempo total: ${tiempoFinal}`;
+
+    const record = obtenerRecord();
+
+    if (record) {
+        puntajeFinal.innerHTML += `<br><br>🏆 Récord: ${record.puntaje}/${preguntas.length} - ${record.tiempo}s`;
+    }
+
+    if (preguntasFalladas.length > 0) {
+        puntajeFinal.innerHTML += "<br><br>❌ Preguntas falladas:<br>";
+
+        preguntasFalladas.forEach((pregunta) => {
+            puntajeFinal.innerHTML += `- ${pregunta}<br>`;
+        });
+    }
 }
 
-btnIniciar.addEventListener("click", (e) => {
-    e.preventDefault();
-
+btnIniciar.addEventListener("click", () => {
     indiceActual = 0;
     puntaje = 0;
     segundos = 0;
     respondido = false;
+    preguntasFalladas = [];
 
     cronometro.textContent = "Tiempo: 00:00";
 
-    if (modoRandom) {
-        preguntas = mezclarPreguntas(preguntasOriginales);
-    } else {
-        preguntas = [...preguntasOriginales];
-    }
+    preguntas = modoRandom
+        ? mezclarPreguntas(preguntasOriginales)
+        : [...preguntasOriginales];
 
     menuInicial.style.display = "none";
     quizContainer.style.display = "block";
-    resultado.style.display = "none";
 
-    progreso.style.display = "block";
-    cronometro.style.display = "block";
-    pregunta.style.display = "block";
-    opciones.style.display = "grid";
+    resultado.style.display = "none";
 
     iniciarCronometro();
     mostrarPregunta();
 });
 
-btnRandom.addEventListener("click", (e) => {
-    e.preventDefault();
-
+btnRandom.addEventListener("click", () => {
     modoRandom = !modoRandom;
 
     btnRandom.textContent =
@@ -455,9 +494,16 @@ btnRandom.addEventListener("click", (e) => {
     btnRandom.classList.toggle("activo", modoRandom);
 });
 
-btnSiguiente.addEventListener("click", (e) => {
-    e.preventDefault();
+btnExamen.addEventListener("click", () => {
+    modoExamen = !modoExamen;
 
+    btnExamen.textContent =
+        modoExamen ? "Modo examen: ON" : "Modo examen: OFF";
+
+    btnExamen.classList.toggle("activo", modoExamen);
+});
+
+btnSiguiente.addEventListener("click", () => {
     indiceActual++;
 
     if (indiceActual < preguntas.length) {
@@ -467,33 +513,7 @@ btnSiguiente.addEventListener("click", (e) => {
     }
 });
 
-btnReiniciar.addEventListener("click", (e) => {
-    e.preventDefault();
-
-    indiceActual = 0;
-    puntaje = 0;
-    segundos = 0;
-    respondido = false;
-
-    cronometro.textContent = "Tiempo: 00:00";
-
-    if (modoRandom) {
-        preguntas = mezclarPreguntas(preguntasOriginales);
-    } else {
-        preguntas = [...preguntasOriginales];
-    }
-
-    resultado.style.display = "none";
-
-    progreso.style.display = "block";
-    cronometro.style.display = "block";
-    pregunta.style.display = "block";
-    opciones.style.display = "grid";
-
-    iniciarCronometro();
-    mostrarPregunta();
+btnReiniciar.addEventListener("click", () => {
+    menuInicial.style.display = "block";
+    quizContainer.style.display = "none";
 });
-
-// Estado inicial
-menuInicial.style.display = "block";
-quizContainer.style.display = "none";
