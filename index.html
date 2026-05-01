@@ -14,31 +14,36 @@
     <button type="button" id="btn-random">Modo random: OFF</button>
     <button type="button" id="btn-examen">Modo examen: OFF</button>
     <button type="button" id="btn-iniciar">Iniciar Test</button>
+    <button type="button" id="btn-ver-historial">Historial de intentos</button>
 </div>
 
-<div id="quiz-container" style="display: none;">
+<div id="quiz-container" style="display:none;">
     <p id="progreso"></p>
-
-    <div id="barra-contenedor">
-        <div id="barra-progreso"></div>
-    </div>
-
     <p id="cronometro">Tiempo: 00:00</p>
 
     <h2 id="pregunta"></h2>
 
     <div id="opciones"></div>
 
-    <div id="explicacion" style="display: none;"></div>
+    <div id="explicacion" style="display:none;"></div>
 
-    <button type="button" id="btn-siguiente" style="display: none;">Siguiente</button>
+    <button type="button" id="btn-siguiente" style="display:none;">Siguiente</button>
 
-    <div id="resultado" style="display: none;">
+    <div id="resultado" style="display:none;">
         <p id="puntaje-final"></p>
-        <button type="button" id="btn-reiniciar">Reiniciar</button>
+        <button type="button" id="btn-menu">Volver al menú</button>
     </div>
 </div>
 
+<div id="historial-global" style="display:none;">
+    <h2>Historial de intentos</h2>
+    <div id="contenido-historial"></div>
+
+    <button type="button" id="btn-borrar-historial">Borrar historial</button>
+    <button type="button" id="btn-volver-menu">Volver al menú</button>
+</div>
+
 <script src="examen.js"></script>
+
 </body>
 </html>
