@@ -9,7 +9,18 @@
 <body>
 
 <div id="menu-inicial">
-    <h1>Test de Bases de Datos</h1>
+    <h1>Selecciona un Test</h1>
+
+    <div id="selector-test">
+        <button type="button" id="btn-anterior">◀</button>
+
+        <div id="test-card">
+            <h2 id="nombre-test">Bases de Datos</h2>
+            <p id="cantidad-preguntas">50 preguntas</p>
+        </div>
+
+        <button type="button" id="btn-siguiente-test">▶</button>
+    </div>
 
     <button type="button" id="btn-random">Modo random: OFF</button>
     <button type="button" id="btn-examen">Modo examen: OFF</button>
@@ -28,11 +39,13 @@
     <div id="explicacion" style="display:none;"></div>
 
     <button type="button" id="btn-siguiente" style="display:none;">Siguiente</button>
+    <button type="button" id="btn-salir">Volver al menú</button>
 
     <div id="resultado" style="display:none;">
         <p id="puntaje-final"></p>
         <button type="button" id="btn-menu">Volver al menú</button>
     </div>
+</div>
 </div>
 
 <div id="historial-global" style="display:none;">
@@ -41,6 +54,27 @@
 
     <button type="button" id="btn-borrar-historial">Borrar historial</button>
     <button type="button" id="btn-volver-menu">Volver al menú</button>
+</div>
+
+<div id="modal-pendiente" class="modal" style="display:none;">
+    <div class="modal-contenido">
+        <h2>Intento pendiente</h2>
+
+        <p>
+            Hay un test sin terminar guardado.
+            ¿Quieres continuarlo o empezar uno nuevo?
+        </p>
+
+        <div class="modal-botones">
+            <button type="button" id="btn-continuar-pendiente">
+                Continuar
+            </button>
+
+            <button type="button" id="btn-descartar-pendiente">
+                Empezar de nuevo
+            </button>
+        </div>
+    </div>
 </div>
 
 <script src="examen.js"></script>
