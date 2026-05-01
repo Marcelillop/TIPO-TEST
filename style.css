@@ -12,28 +12,23 @@ body {
     align-items: center;
 }
 
-#menu-inicial {
-    background: white;
-    padding: 40px;
-    border-radius: 20px;
-    text-align: center;
-    box-shadow: 0 15px 35px rgba(0,0,0,0.15);
-    width: 90%;
-    max-width: 600px;
-}
-
-#menu-inicial h1 {
-    margin-bottom: 30px;
-    color: #2a5298;
-}
-
+#menu-inicial,
 #quiz-container {
     width: 90%;
     max-width: 800px;
-    background: #ffffff;
+    background: white;
     padding: 35px;
     border-radius: 22px;
     box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+}
+
+#menu-inicial {
+    text-align: center;
+}
+
+#menu-inicial h1 {
+    color: #2a5298;
+    margin-bottom: 30px;
 }
 
 #progreso {
@@ -54,9 +49,25 @@ body {
     margin-bottom: 25px;
 }
 
+#barra-contenedor {
+    width: 100%;
+    height: 18px;
+    background: #ddd;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+#barra-progreso {
+    height: 100%;
+    width: 0%;
+    background: #2a5298;
+    transition: width 0.3s ease;
+}
+
 #opciones {
     display: grid;
-    gap: 15px;
+    gap: 2px;
 }
 
 #opciones button {
@@ -64,6 +75,7 @@ body {
     border: 2px solid #ddd;
     border-radius: 12px;
     background: #f7f9fc;
+    color: #111; 
     cursor: pointer;
     font-size: 16px;
     transition: 0.2s;
@@ -96,12 +108,10 @@ body {
     font-size: 16px;
 }
 
-#btn-siguiente,
-#btn-reiniciar,
-#btn-iniciar,
-#btn-random {
+button {
     margin-top: 20px;
-    padding: 14px 25px;
+    margin-right: 10px;
+    padding: 10px 25px;
     border: none;
     border-radius: 12px;
     color: white;
@@ -109,22 +119,10 @@ body {
     cursor: pointer;
 }
 
-#btn-iniciar {
-    background: #2a5298;
-}
-
-#btn-iniciar:hover {
-    background: #1e3c72;
-}
-
+#btn-iniciar,
 #btn-siguiente,
 #btn-reiniciar {
     background: #2a5298;
-}
-
-#btn-siguiente:hover,
-#btn-reiniciar:hover {
-    background: #1e3c72;
 }
 
 #btn-random {
@@ -135,11 +133,19 @@ body {
     background: #2e7d32;
 }
 
+#btn-examen {
+    background: #6a1b9a;
+}
+
+#btn-examen.activo {
+    background: #ab47bc;
+}
+
 #resultado {
     text-align: center;
 }
 
 #puntaje-final {
-    font-size: 26px;
+    font-size: 22px;
     font-weight: bold;
 }
