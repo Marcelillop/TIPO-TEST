@@ -305,30 +305,37 @@ let preguntasOriginales = [...preguntas];
 
 let indiceActual = 0;
 let puntaje = 0;
-let respondido = false;
+let fallos = 0;
 let segundos = 0;
+let respondido = false;
 let intervaloCronometro;
 let modoRandom = false;
 let modoExamen = false;
-let preguntasFalladas = [];
+let historialFallos = [];
+let respuestaSeleccionada = null;
 
 const menuInicial = document.getElementById("menu-inicial");
 const quizContainer = document.getElementById("quiz-container");
+const historialGlobal = document.getElementById("historial-global");
 
 const btnIniciar = document.getElementById("btn-iniciar");
 const btnRandom = document.getElementById("btn-random");
 const btnExamen = document.getElementById("btn-examen");
+const btnSiguiente = document.getElementById("btn-siguiente");
+const btnMenu = document.getElementById("btn-menu");
+
+const btnVerHistorial = document.getElementById("btn-ver-historial");
+const btnVolverMenu = document.getElementById("btn-volver-menu");
+const btnBorrarHistorial = document.getElementById("btn-borrar-historial");
 
 const progreso = document.getElementById("progreso");
 const cronometro = document.getElementById("cronometro");
 const pregunta = document.getElementById("pregunta");
 const opciones = document.getElementById("opciones");
 const explicacion = document.getElementById("explicacion");
-const btnSiguiente = document.getElementById("btn-siguiente");
 const resultado = document.getElementById("resultado");
 const puntajeFinal = document.getElementById("puntaje-final");
-const btnReiniciar = document.getElementById("btn-reiniciar");
-const barraProgreso = document.getElementById("barra-progreso");
+const contenidoHistorial = document.getElementById("contenido-historial");
 
 function mezclarPreguntas(array) {
     return [...array].sort(() => Math.random() - 0.5);
@@ -348,91 +355,135 @@ function iniciarCronometro() {
     }, 1000);
 }
 
-function guardarRecord() {
-    const record = JSON.parse(localStorage.getItem("recordQuiz"));
-
-    const nuevoRecord = {
-        puntaje,
-        tiempo: segundos
-    };
-
-    if (
-        !record ||
-        puntaje > record.puntaje ||
-        (puntaje === record.puntaje && segundos < record.tiempo)
-    ) {
-        localStorage.setItem("recordQuiz", JSON.stringify(nuevoRecord));
-    }
-}
-
-function obtenerRecord() {
-    return JSON.parse(localStorage.getItem("recordQuiz"));
-}
-
 function mostrarPregunta() {
     respondido = false;
-    btnSiguiente.style.display = "none";
+    respuestaSeleccionada = null;
+
     opciones.innerHTML = "";
     explicacion.style.display = "none";
+    btnSiguiente.style.display = "none";
 
     const actual = preguntas[indiceActual];
 
-    progreso.textContent = `Pregunta ${indiceActual + 1} de ${preguntas.length}`;
-    pregunta.textContent = actual.pregunta;
+    progreso.textContent =
+        `Pregunta ${indiceActual + 1} de ${preguntas.length}`;
 
-    const porcentaje = (indiceActual / preguntas.length) * 100;
-    barraProgreso.style.width = `${porcentaje}%`;
+    pregunta.textContent = actual.pregunta;
 
     actual.opciones.forEach((opcion, index) => {
         const boton = document.createElement("button");
         boton.type = "button";
         boton.textContent = opcion;
-        boton.addEventListener("click", () => seleccionarRespuesta(index));
+
+        if (modoExamen) {
+            boton.addEventListener("click", () =>
+                seleccionarOpcion(index)
+            );
+        } else {
+            boton.addEventListener("click", () =>
+                responderNormal(index)
+            );
+        }
+
         opciones.appendChild(boton);
     });
 }
 
-function seleccionarRespuesta(index) {
+function responderNormal(index) {
     if (respondido) return;
 
     respondido = true;
+    respuestaSeleccionada = index;
 
+    corregirRespuesta();
+
+    btnSiguiente.style.display = "block";
+}
+
+function seleccionarOpcion(index) {
+    if (!modoExamen) return;
+
+    const botones = opciones.querySelectorAll("button");
+
+    botones.forEach(btn =>
+        btn.classList.remove("seleccionada")
+    );
+
+    botones[index].classList.add("seleccionada");
+
+    respuestaSeleccionada = index;
+
+    btnSiguiente.style.display = "block";
+}
+
+function corregirRespuesta() {
     const actual = preguntas[indiceActual];
     const correcta = actual.correcta;
     const botones = opciones.querySelectorAll("button");
 
-    botones.forEach((btn, i) => {
-        btn.disabled = true;
-
-        if (i === correcta) {
-            btn.classList.add("correcta");
-        }
-
-        if (i === index && i !== correcta) {
-            btn.classList.add("incorrecta");
-        }
-    });
-
-    if (index === correcta) {
+    if (respuestaSeleccionada === correcta) {
         puntaje++;
-    } else if (modoExamen) {
-        puntaje -= 0.33;
-        if (puntaje < 0) puntaje = 0;
-        preguntasFalladas.push(actual.pregunta);
+    } else {
+        fallos++;
+
+        historialFallos.push({
+            pregunta: actual.pregunta,
+            correcta: actual.opciones[correcta]
+        });
     }
 
-    explicacion.textContent = actual.explicacion;
-    explicacion.style.display = "block";
+    if (!modoExamen) {
+        botones.forEach((btn, i) => {
+            btn.disabled = true;
 
-    btnSiguiente.style.display = "block";
+            if (i === correcta) {
+                btn.classList.add("correcta");
+            }
+
+            if (
+                i === respuestaSeleccionada &&
+                i !== correcta
+            ) {
+                btn.classList.add("incorrecta");
+            }
+        });
+
+        explicacion.textContent = actual.explicacion;
+        explicacion.style.display = "block";
+    }
+}
+
+function calcularNota() {
+    let notaBase = (puntaje / preguntas.length) * 10;
+    let penalizacion = Math.floor(fallos / 3) * 0.33;
+
+    return Math.max(0, notaBase - penalizacion);
+}
+
+function guardarIntento() {
+    const historial =
+        JSON.parse(localStorage.getItem("historialTest")) || [];
+
+    historial.push({
+        fecha: new Date().toLocaleString(),
+        tiempo: cronometro.textContent.replace("Tiempo: ", ""),
+        aciertos: puntaje,
+        fallos: fallos,
+        nota: calcularNota().toFixed(2),
+        modoExamen: modoExamen,
+        errores: historialFallos
+    });
+
+    localStorage.setItem(
+        "historialTest",
+        JSON.stringify(historial)
+    );
 }
 
 function mostrarResultado() {
     clearInterval(intervaloCronometro);
 
-    barraProgreso.style.width = "100%";
-
-    guardarRecord();
+    guardarIntento();
 
     progreso.style.display = "none";
     cronometro.style.display = "none";
@@ -443,42 +494,86 @@ function mostrarResultado() {
 
     resultado.style.display = "block";
 
-    const tiempoFinal = cronometro.textContent.replace("Tiempo: ", "");
+    puntajeFinal.innerHTML = `
+        Aciertos: ${puntaje}/${preguntas.length}<br>
+        Fallos: ${fallos}<br>
+        Tiempo: ${cronometro.textContent.replace("Tiempo: ", "")}<br>
+        Nota final: ${calcularNota().toFixed(2)}/10
+    `;
+}
 
-    puntajeFinal.innerHTML =
-        `${puntaje.toFixed(2)}/${preguntas.length} correctas | Tiempo total: ${tiempoFinal}`;
+function cargarHistorial() {
+    const historial =
+        JSON.parse(localStorage.getItem("historialTest")) || [];
 
-    const record = obtenerRecord();
+    contenidoHistorial.innerHTML = "";
 
-    if (record) {
-        puntajeFinal.innerHTML += `<br><br>🏆 Récord: ${record.puntaje}/${preguntas.length} - ${record.tiempo}s`;
-    }
+    historial.forEach((intento, index) => {
+        const detallesId = `detalles-${index}`;
 
-    if (preguntasFalladas.length > 0) {
-        puntajeFinal.innerHTML += "<br><br>❌ Preguntas falladas:<br>";
+        let html = `
+            <div class="intento">
+                <button 
+                    class="btn-intento"
+                    onclick="toggleDetalles('${detallesId}')">
+                    Intento ${index + 1}
+                    ${intento.modoExamen ? "(Examen)" : ""}
+                </button>
 
-        preguntasFalladas.forEach((pregunta) => {
-            puntajeFinal.innerHTML += `- ${pregunta}<br>`;
+                <div id="${detallesId}" class="detalles-intento" style="display:none;">
+                    Fecha: ${intento.fecha}<br>
+                    Tiempo: ${intento.tiempo}<br>
+                    Aciertos: ${intento.aciertos}<br>
+                    Fallos: ${intento.fallos}<br>
+                    Nota: ${intento.nota}/10
+        `;
+
+        intento.errores.forEach(error => {
+            html += `
+                <div class="error-item">
+                    ${error.pregunta}<br>
+                    Correcta: ${error.correcta}
+                </div>
+            `;
         });
-    }
+
+        html += `
+                </div>
+            </div>
+        `;
+
+        contenidoHistorial.innerHTML += html;
+    });
+}
+
+function toggleDetalles(id) {
+    const elemento = document.getElementById(id);
+
+    elemento.style.display =
+        elemento.style.display === "none"
+            ? "block"
+            : "none";
 }
 
 btnIniciar.addEventListener("click", () => {
     indiceActual = 0;
     puntaje = 0;
+    fallos = 0;
     segundos = 0;
-    respondido = false;
-    preguntasFalladas = [];
-
-    cronometro.textContent = "Tiempo: 00:00";
+    historialFallos = [];
 
     preguntas = modoRandom
         ? mezclarPreguntas(preguntasOriginales)
         : [...preguntasOriginales];
 
     menuInicial.style.display = "none";
+    historialGlobal.style.display = "none";
     quizContainer.style.display = "block";
 
+    progreso.style.display = "block";
+    cronometro.style.display = "block";
+    pregunta.style.display = "block";
+    opciones.style.display = "grid";
     resultado.style.display = "none";
 
     iniciarCronometro();
@@ -491,7 +586,7 @@ btnRandom.addEventListener("click", () => {
     btnRandom.textContent =
         modoRandom ? "Modo random: ON" : "Modo random: OFF";
 
-    btnRandom.classList.toggle("activo", modoRandom);
+    btnRandom.classList.toggle("activo");
 });
 
 btnExamen.addEventListener("click", () => {
@@ -500,10 +595,26 @@ btnExamen.addEventListener("click", () => {
     btnExamen.textContent =
         modoExamen ? "Modo examen: ON" : "Modo examen: OFF";
 
-    btnExamen.classList.toggle("activo", modoExamen);
+    btnExamen.classList.toggle("activo");
 });
 
 btnSiguiente.addEventListener("click", () => {
+    if (modoExamen) {
+        if (respuestaSeleccionada === null) return;
+
+        corregirRespuesta();
+
+        indiceActual++;
+
+        if (indiceActual < preguntas.length) {
+            mostrarPregunta();
+        } else {
+            mostrarResultado();
+        }
+
+        return;
+    }
+
     indiceActual++;
 
     if (indiceActual < preguntas.length) {
@@ -513,7 +624,25 @@ btnSiguiente.addEventListener("click", () => {
     }
 });
 
-btnReiniciar.addEventListener("click", () => {
-    menuInicial.style.display = "block";
+btnMenu.addEventListener("click", () => {
+    resultado.style.display = "none";
     quizContainer.style.display = "none";
+    menuInicial.style.display = "block";
+});
+
+btnVerHistorial.addEventListener("click", () => {
+    menuInicial.style.display = "none";
+    historialGlobal.style.display = "block";
+
+    cargarHistorial();
+});
+
+btnVolverMenu.addEventListener("click", () => {
+    historialGlobal.style.display = "none";
+    menuInicial.style.display = "block";
+});
+
+btnBorrarHistorial.addEventListener("click", () => {
+    localStorage.removeItem("historialTest");
+    cargarHistorial();
 });
