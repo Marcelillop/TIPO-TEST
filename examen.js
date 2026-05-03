@@ -597,10 +597,14 @@ function corregirRespuesta() {
 }
 
 function calcularNota() {
-    const notaBase = (puntaje / preguntas.length) * 10;
-    const penalizacion = Math.floor(fallos / 3) * 0.33;
+    const total = preguntas.length;
+    const valorPregunta = 10 / total;
 
-    return Math.max(0, notaBase - penalizacion);
+    const penalizacionPorFallos = Math.floor(fallos / 3) * valorPregunta;
+
+    const notaBase = puntaje * valorPregunta;
+
+    return Math.max(0, notaBase - penalizacionPorFallos);
 }
 
 function obtenerClaveHistorialPorIndice(indice) {
