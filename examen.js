@@ -955,15 +955,18 @@ function mostrarResultado() {
 }
 
 function cargarHistorial(tipoTest) {
-    const claveHistorial =
-    tipoTest === "bd"
-        ? "historial_basesdedatos"
-        : tipoTest === "hw"
-        ? "historial_hardware"
-        : "historial_windowsserver";
+    let claveHistorial = "";
+
+    if (tipoTest === "bd") {
+        claveHistorial = "historial_basesdedatos";
+    } else if (tipoTest === "hw") {
+        claveHistorial = "historial_hardware";
+    } else if (tipoTest === "ws") {
+        claveHistorial = "historial_windowsserver";
+    }
 
     const historial =
-        JSON.parse(localStorage.getItem(clave)) || [];
+        JSON.parse(localStorage.getItem(claveHistorial)) || [];
 
     contenidoHistorial.innerHTML = "";
 
@@ -974,11 +977,12 @@ function cargarHistorial(tipoTest) {
     }
 
     historial.forEach((intento, index) => {
-        const detallesId = `detalle-${tipoTest}-${index}`;
+        const detallesId = `detalles-${tipoTest}-${index}`;
 
         let html = `
             <div class="intento">
-                <button class="btn-intento"
+                <button
+                    class="btn-intento"
                     onclick="toggleDetalles('${detallesId}')">
                     Intento ${index + 1}
                     ${intento.modoExamen ? "(Examen)" : ""}
@@ -1001,7 +1005,10 @@ function cargarHistorial(tipoTest) {
             `;
         });
 
-        html += `</div></div>`;
+        html += `
+                </div>
+            </div>
+        `;
 
         contenidoHistorial.innerHTML += html;
     });
