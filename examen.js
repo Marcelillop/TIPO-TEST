@@ -1148,6 +1148,7 @@ btnVolverMenu.addEventListener("click", () => {
 btnBorrarHistorial.addEventListener("click", () => {
     localStorage.removeItem("historial_basesdedatos");
     localStorage.removeItem("historial_hardware");
+    localStorage.removeItem("historial_windowsserver");
 
     contenidoHistorial.innerHTML = `
         <button onclick="cargarHistorial('bd')">
@@ -1156,6 +1157,10 @@ btnBorrarHistorial.addEventListener("click", () => {
 
         <button onclick="cargarHistorial('hw')">
             Historial Hardware
+        </button>
+
+        <button onclick="cargarHistorial('ws')">
+            Historial Windows Server
         </button>
     `;
 });
