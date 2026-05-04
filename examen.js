@@ -678,6 +678,21 @@ function mezclarPreguntas(array) {
     return [...array].sort(() => Math.random() - 0.5);
 }
 
+function mezclarOpciones(pregunta) {
+    const opcionesMezcladas = pregunta.opciones.map((opcion, index) => ({
+        texto: opcion,
+        esCorrecta: index === pregunta.correcta
+    }));
+
+    opcionesMezcladas.sort(() => Math.random() - 0.5);
+
+    return {
+        ...pregunta,
+        opciones: opcionesMezcladas.map(op => op.texto),
+        correcta: opcionesMezcladas.findIndex(op => op.esCorrecta)
+    };
+}
+
 function iniciarCronometro() {
     clearInterval(intervaloCronometro);
 
@@ -704,12 +719,11 @@ function iniciarNuevoTest() {
 
     const bancoActual = bancosTests[testSeleccionado].preguntas;
 
-    if (modoExamen) {
-        preguntas = mezclarPreguntas(bancoActual).slice(
-            0,
-            Math.min(20, bancoActual.length)
-        );
-    } else {
+  if (modoExamen) {
+    preguntas = mezclarPreguntas(bancoActual)
+        .slice(0, Math.min(20, bancoActual.length))
+        .map(pregunta => mezclarOpciones(pregunta));
+      }else {
         preguntas = modoRandom
             ? mezclarPreguntas(bancoActual)
             : [...bancoActual];
