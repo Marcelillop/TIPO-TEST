@@ -381,6 +381,230 @@ let preguntasHardware = [
     }
 ];
 
+let preguntasWindowsServer = [
+{
+    pregunta: "¿Cuál de las siguientes opciones describe mejor lo que es un rol en Windows Server?",
+    opciones: [
+        "Un conjunto de permisos para usuarios",
+        "Una restricción de acceso",
+        "Una capacidad que se agrega al servidor para ofrecer un servicio",
+        "Una función de seguridad"
+    ],
+    correcta: 2,
+    explicacion: "Un rol es una capacidad que se instala en Windows Server para proporcionar servicios a clientes de red."
+},
+{
+    pregunta: "¿Qué son las características en Windows Server?",
+    opciones: [
+        "Componentes independientes de apoyo",
+        "Restricciones de seguridad",
+        "Permisos de usuarios",
+        "Ninguna de las anteriores"
+    ],
+    correcta: 0,
+    explicacion: "Las características son componentes complementarios que apoyan las funciones del servidor."
+},
+{
+    pregunta: "¿Cuál es un ejemplo de característica disponible en Windows Server?",
+    opciones: [
+        "Administración de directivas de grupo",
+        "Firewall",
+        "Antivirus",
+        "Ninguna de los anteriores"
+    ],
+    correcta: 0,
+    explicacion: "La administración de directivas de grupo es una característica instalable."
+},
+{
+    pregunta: "¿Qué función cumple el archivo ntds.dit en un controlador de dominio?",
+    opciones: [
+        "Crear usuarios",
+        "Guardar contraseñas",
+        "Base de datos de Active Directory",
+        "Ninguna de las anteriores"
+    ],
+    correcta: 2,
+    explicacion: "ntds.dit contiene la base de datos principal de Active Directory."
+},
+{
+    pregunta: "¿Cuál es el mayor contenedor lógico que abarca todos los dominios dentro de su ámbito?",
+    opciones: [
+        "Dominio padre",
+        "Bosque",
+        "Árbol",
+        "Ninguno"
+    ],
+    correcta: 1,
+    explicacion: "El bosque es el contenedor lógico más grande de Active Directory."
+},
+{
+    pregunta: "¿Qué es el DN?",
+    opciones: [
+        "Dominio de Red",
+        "Directorio de Nombres",
+        "Distinct Name",
+        "Dato Numérico"
+    ],
+    correcta: 2,
+    explicacion: "DN significa Distinguished Name (Nombre Distintivo)."
+},
+{
+    pregunta: "¿Qué grupo se asigna por defecto a una cuenta de usuario recién creada?",
+    opciones: [
+        "Administradores del Dominio",
+        "Usuarios del Dominio",
+        "Administradores del Sistema",
+        "Invitados"
+    ],
+    correcta: 1,
+    explicacion: "Por defecto pertenece al grupo Usuarios del Dominio."
+},
+{
+    pregunta: "¿Qué comando se utiliza para identificar la interfaz de red en CMD?",
+    opciones: [
+        "netsh interface ipv4 show interfaces",
+        "ipconfig /all",
+        "Get-NetIPInterface",
+        "show interface"
+    ],
+    correcta: 0,
+    explicacion: "Ese comando muestra las interfaces de red disponibles."
+},
+{
+    pregunta: "¿Qué comando consulta atributos de un objeto en Active Directory?",
+    opciones: [
+        "dsatt",
+        "dsquery",
+        "dsget",
+        "dsatrib",
+        "Ninguna"
+    ],
+    correcta: 2,
+    explicacion: "dsget obtiene atributos de objetos del directorio."
+},
+{
+    pregunta: "¿Qué comando lista usuarios en Active Directory?",
+    opciones: [
+        "dsadd",
+        "dsuser",
+        "dsget",
+        "dsquery"
+    ],
+    correcta: 3,
+    explicacion: "dsquery permite listar objetos como usuarios."
+},
+{
+    pregunta: "¿Cuál es la función principal de las cuentas de usuario en Active Directory?",
+    opciones: [
+        "Instalar software",
+        "Controlar internet",
+        "Autenticar identidad y autorizar acceso",
+        "Gestionar seguridad física"
+    ],
+    correcta: 2,
+    explicacion: "Permiten autenticar y autorizar acceso a recursos."
+},
+{
+    pregunta: "¿Qué opción se selecciona al instalar el primer controlador de dominio?",
+    opciones: [
+        "Agregar un nuevo bosque",
+        "Agregar controlador a dominio existente",
+        "Agregar dominio a bosque existente",
+        "Unirse a grupo de trabajo"
+    ],
+    correcta: 0,
+    explicacion: "Si es el primero, debe crearse un nuevo bosque."
+},
+{
+    pregunta: "¿Qué ocurre si se corrompe la tabla MBR?",
+    opciones: [
+        "El sistema va más lento",
+        "Se pierden todos los datos",
+        "El sistema no arranca",
+        "Se reconfiguran particiones"
+    ],
+    correcta: 2,
+    explicacion: "La corrupción del MBR impide arrancar el sistema."
+},
+{
+    pregunta: "¿Cómo direccionan la información MBR y GPT?",
+    opciones: [
+        "MBR usa CHS y GPT usa LBA",
+        "Ambos usan LBA",
+        "Ambos usan CHS",
+        "MBR usa LBA y GPT usa CHS"
+    ],
+    correcta: 0,
+    explicacion: "MBR usa CHS tradicionalmente y GPT LBA."
+},
+{
+    pregunta: "¿Cuántas particiones soporta GPT?",
+    opciones: [
+        "64",
+        "128",
+        "256",
+        "Sin límite"
+    ],
+    correcta: 1,
+    explicacion: "GPT soporta hasta 128 particiones por defecto en Windows."
+},
+{
+    pregunta: "¿Qué relación existe entre MBR y BIOS?",
+    opciones: [
+        "BIOS es parte del MBR",
+        "MBR usa BIOS para acceder a datos",
+        "Son independientes",
+        "MBR fue diseñado para trabajar con BIOS"
+    ],
+    correcta: 3,
+    explicacion: "El MBR fue diseñado específicamente para sistemas BIOS."
+},
+{
+    pregunta: "¿Qué efecto tiene el bloqueo de herencia en una OU?",
+    opciones: [
+        "Bloquea todas las GPO del dominio",
+        "Bloquea GPO heredadas del OU padre",
+        "Elimina GPO",
+        "Permite aplicar GPO del padre"
+    ],
+    correcta: 1,
+    explicacion: "El bloqueo de herencia evita aplicar GPO heredadas."
+},
+{
+    pregunta: "¿Sintaxis correcta de dsadd user para crear usuario en una OU?",
+    opciones: [
+        'dsadd user "cn=Usuario,dc=dominio,dc=com"',
+        'dsadd user "ou=Usuario,cn=dominio,dc=com"',
+        'dsadd user "cn=Usuario,ou=Profesores,dc=dominio,dc=com"',
+        'dsadd user "name=Usuario,dc=dominio,dc=com"'
+    ],
+    correcta: 2,
+    explicacion: "La ruta LDAP correcta incluye CN y OU."
+},
+{
+    pregunta: "¿Qué cmdlet crea un nuevo usuario en Active Directory?",
+    opciones: [
+        "Create-ADUser",
+        "New-ADUser",
+        "Set-ADUser",
+        "Add-ADUser"
+    ],
+    correcta: 1,
+    explicacion: "New-ADUser es el cmdlet correcto."
+},
+{
+    pregunta: "¿Qué función cumple un perfil obligatorio en Windows?",
+    opciones: [
+        "Restringir funciones",
+        "Obligar contraseña segura",
+        "Cargar configuración predefinida en cada inicio",
+        "Monitorear usuarios"
+    ],
+    correcta: 2,
+    explicacion: "El perfil obligatorio fuerza siempre la misma configuración de usuario."
+}
+];
+
 let preguntasOriginales = [...preguntas];
 
 const bancosTests = [
@@ -391,6 +615,10 @@ const bancosTests = [
     {
         nombre: "Hardware",
         preguntas: preguntasHardware
+    },
+    {
+        nombre: "Windows Server",
+        preguntas: preguntasWindowsServer
     }
 ];
 
@@ -727,10 +955,12 @@ function mostrarResultado() {
 }
 
 function cargarHistorial(tipoTest) {
-    const clave =
-        tipoTest === "bd"
-            ? "historial_basesdedatos"
-            : "historial_hardware";
+    const claveHistorial =
+    tipoTest === "bd"
+        ? "historial_basesdedatos"
+        : tipoTest === "hw"
+        ? "historial_hardware"
+        : "historial_windowsserver";
 
     const historial =
         JSON.parse(localStorage.getItem(clave)) || [];
@@ -888,15 +1118,19 @@ btnVerHistorial.addEventListener("click", () => {
     menuInicial.style.display = "none";
     historialGlobal.style.display = "block";
 
-    contenidoHistorial.innerHTML = `
-        <button onclick="cargarHistorial('bd')">
-            Historial Bases de Datos
-        </button>
+   contenidoHistorial.innerHTML = `
+    <button onclick="cargarHistorial('bd')">
+        Historial Bases de Datos
+    </button>
 
-        <button onclick="cargarHistorial('hw')">
-            Historial Hardware
-        </button>
-    `;
+    <button onclick="cargarHistorial('hw')">
+        Historial Hardware
+    </button>
+
+    <button onclick="cargarHistorial('ws')">
+        Historial Windows Server
+    </button>
+`;
 });
 
 btnVolverMenu.addEventListener("click", () => {
