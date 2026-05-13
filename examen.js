@@ -301,6 +301,230 @@ let preguntas = [
     }
 ];
 
+let preguntasWindowsServer = [
+    {
+        pregunta: "¿Cuál de las siguientes opciones describe mejor lo que es un rol en Windows Server?",
+        opciones: [
+            "Un conjunto de permisos para usuarios",
+            "Una restricción de acceso",
+            "Una capacidad que se agrega al servidor para ofrecer un servicio",
+            "Una función de seguridad"
+        ],
+        correcta: 2,
+        explicacion: "Un rol es una capacidad que se instala en Windows Server para proporcionar servicios."
+    },
+    {
+        pregunta: "¿Qué son las características en Windows Server?",
+        opciones: [
+            "Componentes independientes de apoyo",
+            "Restricciones de seguridad",
+            "Permisos de usuarios",
+            "Ninguna de las anteriores"
+        ],
+        correcta: 0,
+        explicacion: "Las características son componentes adicionales que complementan las funciones del servidor."
+    },
+    {
+        pregunta: "¿Cuál es un ejemplo de característica disponible en Windows Server?",
+        opciones: [
+            "Administración de directivas de grupo",
+            "Firewall",
+            "Antivirus",
+            "Ninguna de las anteriores"
+        ],
+        correcta: 0,
+        explicacion: "La administración de directivas de grupo es una característica disponible en Windows Server."
+    },
+    {
+        pregunta: "¿Qué función cumple el archivo ntds.dit en un controlador de dominio?",
+        opciones: [
+            "Crear usuarios",
+            "Guardar contraseñas",
+            "Base de datos de Active Directory",
+            "Ninguna de las anteriores"
+        ],
+        correcta: 2,
+        explicacion: "ntds.dit contiene la base de datos principal de Active Directory."
+    },
+    {
+        pregunta: "¿Cuál es el mayor contenedor lógico que abarca todos los dominios dentro de su ámbito?",
+        opciones: [
+            "Dominio padre",
+            "Bosque",
+            "Árbol",
+            "Ninguno"
+        ],
+        correcta: 1,
+        explicacion: "El bosque es el contenedor lógico más grande dentro de Active Directory."
+    },
+    {
+        pregunta: "¿Qué es el DN?",
+        opciones: [
+            "Dominio de Red",
+            "Directorio de Nombres",
+            "Distinct Name",
+            "Dato Numérico"
+        ],
+        correcta: 2,
+        explicacion: "DN significa Distinguished Name o Nombre Distinguido."
+    },
+    {
+        pregunta: "¿Qué grupo se asigna por defecto a una cuenta de usuario recién creada?",
+        opciones: [
+            "Administradores del Dominio",
+            "Usuarios del Dominio",
+            "Administradores del Sistema",
+            "Invitados"
+        ],
+        correcta: 1,
+        explicacion: "Por defecto, una cuenta nueva pertenece al grupo Usuarios del Dominio."
+    },
+    {
+        pregunta: "¿Qué comando se utiliza para identificar la interfaz de red en CMD?",
+        opciones: [
+            "netsh interface ipv4 show interfaces",
+            "ipconfig /all",
+            "Get-NetIPInterface",
+            "show interface"
+        ],
+        correcta: 0,
+        explicacion: "El comando netsh interface ipv4 show interfaces muestra las interfaces de red."
+    },
+    {
+        pregunta: "¿Qué comando consulta atributos de un objeto en Active Directory?",
+        opciones: [
+            "dsatt",
+            "dsquery",
+            "dsget",
+            "dsatrib",
+            "Ninguna"
+        ],
+        correcta: 2,
+        explicacion: "dsget permite obtener atributos de objetos de Active Directory."
+    },
+    {
+        pregunta: "¿Qué comando lista usuarios en Active Directory?",
+        opciones: [
+            "dsadd",
+            "dsuser",
+            "dsget",
+            "dsquery"
+        ],
+        correcta: 3,
+        explicacion: "dsquery permite buscar y listar objetos, como usuarios, en Active Directory."
+    },
+    {
+        pregunta: "¿Cuál es la función principal de las cuentas de usuario en Active Directory?",
+        opciones: [
+            "Instalar software",
+            "Controlar internet",
+            "Autenticar identidad y autorizar acceso",
+            "Gestionar seguridad física"
+        ],
+        correcta: 2,
+        explicacion: "Las cuentas de usuario sirven para autenticar identidades y autorizar accesos."
+    },
+    {
+        pregunta: "¿Qué opción se selecciona al instalar el primer controlador de dominio?",
+        opciones: [
+            "Agregar un nuevo bosque",
+            "Agregar controlador a dominio existente",
+            "Agregar dominio a bosque existente",
+            "Unirse a grupo de trabajo"
+        ],
+        correcta: 0,
+        explicacion: "Al instalar el primer controlador de dominio se crea un nuevo bosque."
+    },
+    {
+        pregunta: "¿Qué ocurre si se corrompe la tabla MBR?",
+        opciones: [
+            "El sistema va más lento",
+            "Se pierden todos los datos",
+            "El sistema no arranca",
+            "Se reconfiguran particiones"
+        ],
+        correcta: 2,
+        explicacion: "Si el MBR se corrompe, el sistema puede no arrancar."
+    },
+    {
+        pregunta: "¿Cómo direccionan la información MBR y GPT?",
+        opciones: [
+            "MBR usa CHS y GPT usa LBA",
+            "Ambos usan LBA",
+            "Ambos usan CHS",
+            "MBR usa LBA y GPT usa CHS"
+        ],
+        correcta: 0,
+        explicacion: "Según tus respuestas, MBR usa CHS y GPT usa LBA."
+    },
+    {
+        pregunta: "¿Cuántas particiones soporta GPT?",
+        opciones: [
+            "64",
+            "128",
+            "256",
+            "Sin límite"
+        ],
+        correcta: 1,
+        explicacion: "GPT soporta normalmente 128 particiones en Windows."
+    },
+    {
+        pregunta: "¿Qué relación existe entre MBR y BIOS?",
+        opciones: [
+            "BIOS es parte del MBR",
+            "MBR usa BIOS para acceder a datos",
+            "Son independientes",
+            "MBR fue diseñado para trabajar con BIOS"
+        ],
+        correcta: 3,
+        explicacion: "MBR fue diseñado para trabajar con sistemas BIOS."
+    },
+    {
+        pregunta: "¿Qué efecto tiene el bloqueo de herencia en una OU?",
+        opciones: [
+            "Bloquea todas las GPO del dominio",
+            "Bloquea GPO heredadas del OU padre",
+            "Elimina GPO",
+            "Permite aplicar GPO del padre"
+        ],
+        correcta: 1,
+        explicacion: "El bloqueo de herencia impide aplicar GPO heredadas desde niveles superiores."
+    },
+    {
+        pregunta: "¿Sintaxis correcta de dsadd user para crear usuario en una OU?",
+        opciones: [
+            'dsadd user "cn=Usuario,dc=dominio,dc=com"',
+            'dsadd user "ou=Usuario,cn=dominio,dc=com"',
+            'dsadd user "cn=Usuario,ou=Profesores,dc=dominio,dc=com"',
+            'dsadd user "name=Usuario,dc=dominio,dc=com"'
+        ],
+        correcta: 2,
+        explicacion: "La sintaxis correcta usa CN para el usuario y OU para la unidad organizativa."
+    },
+    {
+        pregunta: "¿Qué cmdlet crea un nuevo usuario en Active Directory?",
+        opciones: [
+            "Create-ADUser",
+            "New-ADUser",
+            "Set-ADUser",
+            "Add-ADUser"
+        ],
+        correcta: 1,
+        explicacion: "El cmdlet correcto para crear usuarios es New-ADUser."
+    },
+    {
+        pregunta: "¿Qué función cumple un perfil obligatorio en Windows?",
+        opciones: [
+            "Restringir funciones",
+            "Obligar contraseña segura",
+            "Cargar configuración predefinida en cada inicio",
+            "Monitorear usuarios"
+        ],
+        correcta: 2,
+        explicacion: "Un perfil obligatorio carga una configuración predefinida en cada inicio de sesión."
+    }
+];
+
 let preguntasHardware = [
 {
     pregunta: "¿La herramienta duplicity está preparada para clonar una carpeta concreta?",
