@@ -302,306 +302,208 @@ let preguntas = [
 ];
 
 let preguntasHardware = [
-    {
-        pregunta: "¿La herramienta duplicity está preparada para clonar una carpeta concreta?",
-        opciones: ["Verdadero", "Falso"],
-        correcta: 0,
-        explicacion: "Duplicity permite hacer copias de seguridad de carpetas concretas."
-    },
-    {
-        pregunta: "Una copia de seguridad que sólo toma en cuenta los datos que han variado desde la última copia de respaldo realizada se conoce como:",
-        opciones: ["Diferencial", "Completa", "Incremental"],
-        correcta: 2,
-        explicacion: "La copia incremental solo guarda los cambios desde la última copia realizada."
-    },
-    {
-        pregunta: "Con la herramienta duplicity, antes de indicar la ruta de un sistema de archivos local, se usa la notación:",
-        opciones: ["file:", "file:/", "file://", "file:///"],
-        correcta: 3,
-        explicacion: "Duplicity utiliza la notación file:/// para rutas locales."
-    },
-    {
-        pregunta: "La copia de seguridad implementada con Clonezilla era de tipo:",
-        opciones: ["Completa", "Diferencial", "Incremental", "Espejo"],
-        correcta: 0,
-        explicacion: "Clonezilla realiza copias completas del sistema."
-    },
-    {
-        pregunta: "En una agrupación RAID 1 implementada con cuatro discos físicos, el espacio aprovechado es:",
-        opciones: ["50%", "25%", "100%", "40%"],
-        correcta: 1,
-        explicacion: "RAID 1 replica la información; con 4 discos solo se aprovecha un 25%."
-    },
-    {
-        pregunta: "A la hora de implementar una agrupación RAID con mdadm, el formato de los discos:",
-        opciones: [
-            "Tiene lugar después de crear la matriz",
-            "Tiene lugar en el momento de crear la matriz",
-            "Tiene lugar antes de crear la matriz",
-            "Se invoca por separado para cada uno de ellos"
-        ],
-        correcta: 0,
-        explicacion: "La matriz se crea primero y después se formatea."
-    },
-    {
-        pregunta: "Por término general, la operación de restauración lleva más tiempo en la modalidad de volcado:",
-        opciones: ["Incremental", "Completo", "Diferencial"],
-        correcta: 0,
-        explicacion: "La restauración incremental requiere aplicar varias copias consecutivas."
-    },
-    {
-        pregunta: "Señala la afirmación cierta en relación al asistente de Clonezilla:",
-        opciones: [
-            "Es capaz de preparar por completo el disco donde depositaremos la imagen",
-            "Obliga a la compactación de la imagen",
-            "Obliga a la verificación del sistema de archivos",
-            "Obliga al cifrado de la imagen",
-            "Obliga a la verificación de la imagen generada"
-        ],
-        correcta: 0,
-        explicacion: "Clonezilla puede preparar completamente el disco destino."
-    },
-    {
-        pregunta: "Opción de mdadm para indicar el nombre de la matriz generada:",
-        opciones: ["-C", "-n", "-l"],
-        correcta: 0,
-        explicacion: "-C se usa para crear la matriz RAID."
-    },
-    {
-        pregunta: "En relación a las características de duplicity, sabemos que el volcado incremental puede ser realizado:",
-        opciones: ["Verdadero", "Falso"],
-        correcta: 0,
-        explicacion: "Duplicity soporta copias incrementales."
-    },
-    {
-        pregunta: "Una copia de seguridad que toma todos los datos modificados desde la última copia completa realizada se conoce como:",
-        opciones: ["RAID 0", "Completa", "Diferencial", "Incremental"],
-        correcta: 2,
-        explicacion: "La copia diferencial guarda todos los cambios desde la última copia completa."
-    }
-];
-
-let preguntasWindowsServer = [
 {
-    pregunta: "¿Cuál de las siguientes opciones describe mejor lo que es un rol en Windows Server?",
-    opciones: [
-        "Un conjunto de permisos para usuarios",
-        "Una restricción de acceso",
-        "Una capacidad que se agrega al servidor para ofrecer un servicio",
-        "Una función de seguridad"
-    ],
-    correcta: 2,
-    explicacion: "Un rol es una capacidad que se instala en Windows Server para proporcionar servicios a clientes de red."
+    pregunta: "¿La herramienta duplicity está preparada para clonar una carpeta concreta?",
+    opciones: ["Verdadero", "Falso"],
+    correcta: 0,
+    explicacion: "Duplicity permite realizar copias de seguridad de carpetas concretas."
 },
 {
-    pregunta: "¿Qué son las características en Windows Server?",
+    pregunta: "¿La herramienta dd está preparada para clonar un disco entero?",
+    opciones: ["Verdadero", "Falso"],
+    correcta: 0,
+    explicacion: "La herramienta dd permite clonar discos completos bit a bit."
+},
+{
+    pregunta: "Una copia de seguridad que sólo toma en cuenta los datos que han variado desde la última copia realizada se conoce como:",
+    opciones: ["Diferencial", "Completa", "Incremental"],
+    correcta: 2,
+    explicacion: "La copia incremental solo almacena cambios desde la última copia."
+},
+{
+    pregunta: "Con duplicity, antes de indicar la ruta local se usa la notación:",
+    opciones: ["file:", "file:/", "file://", "file:///"],
+    correcta: 2,
+    explicacion: "La respuesta marcada en tus apuntes es file://."
+},
+{
+    pregunta: "Con la herramienta dd, el operando if sirve para indicar el origen:",
+    opciones: ["Verdadero", "Falso"],
+    correcta: 0,
+    explicacion: "if significa input file y representa el origen."
+},
+{
+    pregunta: "La copia implementada con Clonezilla era de tipo:",
+    opciones: ["Completa", "Diferencial", "Incremental", "Espejo"],
+    correcta: 0,
+    explicacion: "Clonezilla realiza copias completas."
+},
+{
+    pregunta: "¿Qué alternativas ofrece Windows 10/11 para guardar una imagen del sistema?",
     opciones: [
-        "Componentes independientes de apoyo",
-        "Restricciones de seguridad",
-        "Permisos de usuarios",
-        "Ninguna de las anteriores"
+        "Discos locales, unidades ópticas y carpetas compartidas",
+        "Discos locales y unidades ópticas",
+        "Discos locales y carpetas compartidas",
+        "Ópticas y carpetas compartidas",
+        "Solo discos locales"
     ],
     correcta: 0,
-    explicacion: "Las características son componentes complementarios que apoyan las funciones del servidor."
+    explicacion: "Windows permite guardar imágenes en discos, unidades ópticas y red."
 },
 {
-    pregunta: "¿Cuál es un ejemplo de característica disponible en Windows Server?",
+    pregunta: "En RAID 1 con cuatro discos físicos, el espacio aprovechado es:",
+    opciones: ["50%", "25%", "100%", "40%"],
+    correcta: 1,
+    explicacion: "Según tus respuestas, la correcta marcada es 25%."
+},
+{
+    pregunta: "En mdadm, el formato de los discos:",
     opciones: [
-        "Administración de directivas de grupo",
-        "Firewall",
-        "Antivirus",
-        "Ninguna de los anteriores"
+        "Tiene lugar después de crear la matriz",
+        "Tiene lugar durante la creación",
+        "Tiene lugar antes",
+        "Se hace por separado"
     ],
     correcta: 0,
-    explicacion: "La administración de directivas de grupo es una característica instalable."
+    explicacion: "La matriz RAID se crea primero y luego se formatea."
 },
 {
-    pregunta: "¿Qué función cumple el archivo ntds.dit en un controlador de dominio?",
-    opciones: [
-        "Crear usuarios",
-        "Guardar contraseñas",
-        "Base de datos de Active Directory",
-        "Ninguna de las anteriores"
-    ],
-    correcta: 2,
-    explicacion: "ntds.dit contiene la base de datos principal de Active Directory."
+    pregunta: "La restauración tarda más normalmente en copias:",
+    opciones: ["Incrementales", "Completas", "Diferenciales"],
+    correcta: 0,
+    explicacion: "Las incrementales requieren varias restauraciones consecutivas."
 },
 {
-    pregunta: "¿Cuál es el mayor contenedor lógico que abarca todos los dominios dentro de su ámbito?",
+    pregunta: "¿Qué error existe en este comando?\nsudo mdadm /dev/md49 --add /dev/sdd",
     opciones: [
-        "Dominio padre",
-        "Bosque",
-        "Árbol",
-        "Ninguno"
-    ],
-    correcta: 1,
-    explicacion: "El bosque es el contenedor lógico más grande de Active Directory."
-},
-{
-    pregunta: "¿Qué es el DN?",
-    opciones: [
-        "Dominio de Red",
-        "Directorio de Nombres",
-        "Distinct Name",
-        "Dato Numérico"
-    ],
-    correcta: 2,
-    explicacion: "DN significa Distinguished Name (Nombre Distintivo)."
-},
-{
-    pregunta: "¿Qué grupo se asigna por defecto a una cuenta de usuario recién creada?",
-    opciones: [
-        "Administradores del Dominio",
-        "Usuarios del Dominio",
-        "Administradores del Sistema",
-        "Invitados"
-    ],
-    correcta: 1,
-    explicacion: "Por defecto pertenece al grupo Usuarios del Dominio."
-},
-{
-    pregunta: "¿Qué comando se utiliza para identificar la interfaz de red en CMD?",
-    opciones: [
-        "netsh interface ipv4 show interfaces",
-        "ipconfig /all",
-        "Get-NetIPInterface",
-        "show interface"
+        "Falta --create",
+        "Falta el nombre RAID",
+        "Falta el nivel RAID",
+        "No existe error"
     ],
     correcta: 0,
-    explicacion: "Ese comando muestra las interfaces de red disponibles."
+    explicacion: "El comando necesita indicar correctamente la creación o gestión de la matriz."
 },
 {
-    pregunta: "¿Qué comando consulta atributos de un objeto en Active Directory?",
+    pregunta: "Señala la afirmación cierta sobre Clonezilla:",
     opciones: [
-        "dsatt",
-        "dsquery",
-        "dsget",
-        "dsatrib",
-        "Ninguna"
+        "Prepara completamente el disco",
+        "Obliga a compactar la imagen",
+        "Obliga a verificar sistema de archivos",
+        "Obliga a cifrar la imagen",
+        "Obliga a verificar la restauración"
     ],
+    correcta: 1,
+    explicacion: "Según tus respuestas, la correcta marcada es la B."
+},
+{
+    pregunta: "Opción de mdadm para indicar el nombre de la matriz:",
+    opciones: ["-C", "-n", "-l"],
+    correcta: 0,
+    explicacion: "-C se usa en creación de matrices RAID."
+},
+{
+    pregunta: "Duplicity permite realizar volcados incrementales:",
+    opciones: ["Verdadero", "Falso"],
+    correcta: 1,
+    explicacion: "Según tus respuestas, marcaste Falso."
+},
+{
+    pregunta: "En Windows 10/11 podemos elegir las particiones a copiar:",
+    opciones: ["Verdadero", "Falso"],
+    correcta: 1,
+    explicacion: "Según las respuestas proporcionadas, la correcta es Falso."
+},
+{
+    pregunta: "La copia que guarda todos los cambios desde la última copia completa es:",
+    opciones: ["RAID 0", "Completa", "Diferencial", "Incremental"],
     correcta: 2,
-    explicacion: "dsget obtiene atributos de objetos del directorio."
+    explicacion: "La copia diferencial guarda cambios desde la última copia completa."
 },
 {
-    pregunta: "¿Qué comando lista usuarios en Active Directory?",
+    pregunta: "Clonezilla guarda:",
     opciones: [
-        "dsadd",
-        "dsuser",
-        "dsget",
-        "dsquery"
-    ],
-    correcta: 3,
-    explicacion: "dsquery permite listar objetos como usuarios."
-},
-{
-    pregunta: "¿Cuál es la función principal de las cuentas de usuario en Active Directory?",
-    opciones: [
-        "Instalar software",
-        "Controlar internet",
-        "Autenticar identidad y autorizar acceso",
-        "Gestionar seguridad física"
-    ],
-    correcta: 2,
-    explicacion: "Permiten autenticar y autorizar acceso a recursos."
-},
-{
-    pregunta: "¿Qué opción se selecciona al instalar el primer controlador de dominio?",
-    opciones: [
-        "Agregar un nuevo bosque",
-        "Agregar controlador a dominio existente",
-        "Agregar dominio a bosque existente",
-        "Unirse a grupo de trabajo"
+        "Los bloques usados",
+        "Los bloques no usados",
+        "Todo el disco",
+        "Copia literal bit a bit"
     ],
     correcta: 0,
-    explicacion: "Si es el primero, debe crearse un nuevo bosque."
+    explicacion: "Clonezilla normalmente guarda bloques usados."
 },
 {
-    pregunta: "¿Qué ocurre si se corrompe la tabla MBR?",
-    opciones: [
-        "El sistema va más lento",
-        "Se pierden todos los datos",
-        "El sistema no arranca",
-        "Se reconfiguran particiones"
-    ],
-    correcta: 2,
-    explicacion: "La corrupción del MBR impide arrancar el sistema."
+    pregunta: "Puerto utilizado por Webmin:",
+    opciones: ["20000", "10000", "20", "22"],
+    correcta: 1,
+    explicacion: "Webmin usa por defecto el puerto 10000."
 },
 {
-    pregunta: "¿Cómo direccionan la información MBR y GPT?",
+    pregunta: "Respecto a instalar Webmin:",
     opciones: [
-        "MBR usa CHS y GPT usa LBA",
-        "Ambos usan LBA",
-        "Ambos usan CHS",
-        "MBR usa LBA y GPT usa CHS"
+        "Se recomienda apt-get frente a apt",
+        "Primero se ejecuta un script",
+        "No es compatible con Debian"
     ],
     correcta: 0,
-    explicacion: "MBR usa CHS tradicionalmente y GPT LBA."
+    explicacion: "Según tus respuestas, la correcta es apt-get."
 },
 {
-    pregunta: "¿Cuántas particiones soporta GPT?",
+    pregunta: "Respecto a las copias de seguridad con Webmin:",
     opciones: [
-        "64",
-        "128",
-        "256",
-        "Sin límite"
-    ],
-    correcta: 1,
-    explicacion: "GPT soporta hasta 128 particiones por defecto en Windows."
-},
-{
-    pregunta: "¿Qué relación existe entre MBR y BIOS?",
-    opciones: [
-        "BIOS es parte del MBR",
-        "MBR usa BIOS para acceder a datos",
-        "Son independientes",
-        "MBR fue diseñado para trabajar con BIOS"
-    ],
-    correcta: 3,
-    explicacion: "El MBR fue diseñado específicamente para sistemas BIOS."
-},
-{
-    pregunta: "¿Qué efecto tiene el bloqueo de herencia en una OU?",
-    opciones: [
-        "Bloquea todas las GPO del dominio",
-        "Bloquea GPO heredadas del OU padre",
-        "Elimina GPO",
-        "Permite aplicar GPO del padre"
-    ],
-    correcta: 1,
-    explicacion: "El bloqueo de herencia evita aplicar GPO heredadas."
-},
-{
-    pregunta: "¿Sintaxis correcta de dsadd user para crear usuario en una OU?",
-    opciones: [
-        'dsadd user "cn=Usuario,dc=dominio,dc=com"',
-        'dsadd user "ou=Usuario,cn=dominio,dc=com"',
-        'dsadd user "cn=Usuario,ou=Profesores,dc=dominio,dc=com"',
-        'dsadd user "name=Usuario,dc=dominio,dc=com"'
+        "Un único formato",
+        "Solo gzip",
+        "Varios formatos"
     ],
     correcta: 2,
-    explicacion: "La ruta LDAP correcta incluye CN y OU."
+    explicacion: "Webmin admite varios formatos de compresión."
 },
 {
-    pregunta: "¿Qué cmdlet crea un nuevo usuario en Active Directory?",
+    pregunta: "¿Qué herramientas de Windows permiten crear RAID?",
     opciones: [
-        "Create-ADUser",
-        "New-ADUser",
-        "Set-ADUser",
-        "Add-ADUser"
+        "Administración de discos y diskpart",
+        "Clonezilla y mdadm",
+        "Webmin y duplicity",
+        "Solo diskpart"
+    ],
+    correcta: 0,
+    explicacion: "Windows puede gestionar RAID mediante Administración de discos y diskpart."
+},
+{
+    pregunta: "Si list disk muestra vacío en GPT:",
+    opciones: [
+        "El disco es GPT",
+        "El disco es MBR",
+        "GPT y MBR"
     ],
     correcta: 1,
-    explicacion: "New-ADUser es el cmdlet correcto."
+    explicacion: "Si GPT está vacío significa que el disco usa MBR."
 },
 {
-    pregunta: "¿Qué función cumple un perfil obligatorio en Windows?",
+    pregunta: "Mínimo de discos para RAID 5:",
+    opciones: ["2", "3", "5", "4"],
+    correcta: 1,
+    explicacion: "RAID 5 necesita mínimo 3 discos."
+},
+{
+    pregunta: "¿Qué hace duplicity si no se indica full o incremental?",
     opciones: [
-        "Restringir funciones",
-        "Obligar contraseña segura",
-        "Cargar configuración predefinida en cada inicio",
-        "Monitorear usuarios"
+        "Actúa como full",
+        "Actúa como incremental",
+        "Produce error"
     ],
-    correcta: 2,
-    explicacion: "El perfil obligatorio fuerza siempre la misma configuración de usuario."
+    correcta: 1,
+    explicacion: "Duplicity actúa como incremental por defecto."
+},
+{
+    pregunta: "¿Por qué RAID necesita discos dinámicos en diskpart?",
+    opciones: [
+        "Porque permiten gestionar volúmenes distribuidos",
+        "Porque aumentan velocidad CPU",
+        "Porque reducen consumo RAM",
+        "Porque son obligatorios para GPT"
+    ],
+    correcta: 0,
+    explicacion: "Los discos dinámicos permiten crear y gestionar volúmenes RAID."
 }
 ];
 
