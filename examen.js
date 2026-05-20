@@ -986,7 +986,7 @@ let preguntasRecuHardware = [
     opciones: ["df", "lsblk", "df y lsblk"],
     correcta: 2,
     explicacion: "Ambos comandos muestran información de montaje."
-}
+},
       {
     pregunta: "¿Qué significa que PCI Express sea full duplex?",
     opciones: [
