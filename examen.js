@@ -987,6 +987,485 @@ let preguntasRecuHardware = [
     correcta: 2,
     explicacion: "Ambos comandos muestran información de montaje."
 }
+      {
+    pregunta: "¿Qué significa que PCI Express sea full duplex?",
+    opciones: [
+        "Transmite solo en una dirección",
+        "Puede enviar y recibir datos simultáneamente",
+        "Usa dos discos duros",
+        "Duplica la RAM"
+    ],
+    correcta: 1,
+    explicacion: "PCIe puede enviar y recibir datos al mismo tiempo."
+},
+
+{
+    pregunta: "¿Qué color suele identificar USB 2.0?",
+    opciones: [
+        "Azul",
+        "Rojo",
+        "Negro",
+        "Verde"
+    ],
+    correcta: 2,
+    explicacion: "USB 2.0 normalmente utiliza color negro."
+},
+
+{
+    pregunta: "¿Qué ventaja principal ofrece NVMe frente a SATA?",
+    opciones: [
+        "Menor velocidad",
+        "Mayor latencia",
+        "Mayor ancho de banda",
+        "Menor compatibilidad"
+    ],
+    correcta: 2,
+    explicacion: "NVMe aprovecha PCIe y ofrece mucho mayor ancho de banda."
+},
+
+{
+    pregunta: "¿Qué interfaz se usa normalmente con discos NVMe?",
+    opciones: [
+        "IDE",
+        "PCI Express",
+        "PATA",
+        "AGP"
+    ],
+    correcta: 1,
+    explicacion: "Los SSD NVMe trabajan sobre PCI Express."
+},
+
+{
+    pregunta: "¿Qué dispositivo se considera periférico de entrada?",
+    opciones: [
+        "Impresora",
+        "Altavoz",
+        "Escáner",
+        "Monitor"
+    ],
+    correcta: 2,
+    explicacion: "El escáner introduce información al ordenador."
+},
+
+{
+    pregunta: "¿Qué dispositivo es periférico de salida?",
+    opciones: [
+        "Teclado",
+        "Ratón",
+        "Monitor",
+        "Micrófono"
+    ],
+    correcta: 2,
+    explicacion: "El monitor muestra información al usuario."
+},
+
+{
+    pregunta: "¿Qué periférico puede actuar como entrada y salida?",
+    opciones: [
+        "Pantalla táctil",
+        "Altavoz",
+        "Escáner",
+        "Webcam"
+    ],
+    correcta: 0,
+    explicacion: "La pantalla táctil recibe y muestra información."
+},
+
+{
+    pregunta: "¿Qué significa USB?",
+    opciones: [
+        "Universal Serial Bus",
+        "Universal System Bus",
+        "United Serial Bus",
+        "Universal Storage Bus"
+    ],
+    correcta: 0,
+    explicacion: "USB significa Universal Serial Bus."
+},
+
+{
+    pregunta: "¿Cuál es la principal ventaja del USB Tipo C?",
+    opciones: [
+        "Es paralelo",
+        "No transmite energía",
+        "Es reversible",
+        "Solo sirve para vídeo"
+    ],
+    correcta: 2,
+    explicacion: "USB-C puede conectarse en ambos sentidos."
+},
+
+{
+    pregunta: "¿Qué tecnología permite conectar dispositivos sin apagar el equipo?",
+    opciones: [
+        "Plug and Play",
+        "Hot Swap",
+        "DMA",
+        "POST"
+    ],
+    correcta: 1,
+    explicacion: "Hot Swap permite conectar hardware en caliente."
+},
+
+{
+    pregunta: "¿Qué tipo de disco NO tiene partes mecánicas?",
+    opciones: [
+        "HDD",
+        "SSD",
+        "DVD",
+        "Blu-Ray"
+    ],
+    correcta: 1,
+    explicacion: "Los SSD funcionan con memoria flash."
+},
+
+{
+    pregunta: "¿Qué significa SSD?",
+    opciones: [
+        "Solid State Drive",
+        "Serial Storage Disk",
+        "System State Drive",
+        "Solid Storage Device"
+    ],
+    correcta: 0,
+    explicacion: "SSD significa Solid State Drive."
+},
+
+{
+    pregunta: "¿Qué significa HDD?",
+    opciones: [
+        "Hard Disk Drive",
+        "High Data Disk",
+        "Hard Device Driver",
+        "Hybrid Disk Drive"
+    ],
+    correcta: 0,
+    explicacion: "HDD significa Hard Disk Drive."
+},
+
+{
+    pregunta: "¿Qué característica diferencia principalmente un HDD de un SSD?",
+    opciones: [
+        "El SSD tiene platos mecánicos",
+        "El HDD utiliza memoria flash",
+        "El HDD tiene partes móviles",
+        "El SSD necesita RPM"
+    ],
+    correcta: 2,
+    explicacion: "Los HDD utilizan discos y cabezales mecánicos."
+},
+
+{
+    pregunta: "¿Qué bus de expansión sustituyó a AGP?",
+    opciones: [
+        "ISA",
+        "PCIe",
+        "MCA",
+        "USB"
+    ],
+    correcta: 1,
+    explicacion: "PCI Express sustituyó a AGP."
+},
+
+{
+    pregunta: "¿Qué significa lane en PCI Express?",
+    opciones: [
+        "Canal de comunicación",
+        "Tipo de memoria",
+        "Voltaje",
+        "Disco lógico"
+    ],
+    correcta: 0,
+    explicacion: "Los lanes son canales de transmisión de datos."
+},
+
+{
+    pregunta: "¿Qué velocidad ofrece SATA III?",
+    opciones: [
+        "150 MB/s",
+        "300 MB/s",
+        "600 MB/s",
+        "1 GB/s"
+    ],
+    correcta: 2,
+    explicacion: "SATA III alcanza aproximadamente 600 MB/s."
+},
+
+{
+    pregunta: "¿Qué velocidad ofrece SATA II?",
+    opciones: [
+        "150 MB/s",
+        "300 MB/s",
+        "600 MB/s",
+        "6 GB/s"
+    ],
+    correcta: 1,
+    explicacion: "SATA II ofrece hasta 300 MB/s."
+},
+
+{
+    pregunta: "¿Qué estilo de particionado moderno se recomienda actualmente?",
+    opciones: [
+        "MBR",
+        "GPT",
+        "FAT",
+        "NTFS"
+    ],
+    correcta: 1,
+    explicacion: "GPT es el estilo moderno recomendado."
+},
+
+{
+    pregunta: "¿Qué sistema sustituye normalmente al BIOS clásico?",
+    opciones: [
+        "GPT",
+        "UEFI",
+        "PCIe",
+        "SATA"
+    ],
+    correcta: 1,
+    explicacion: "UEFI reemplaza al BIOS tradicional."
+},
+
+{
+    pregunta: "¿Qué herramienta Linux permite ver dispositivos de bloques?",
+    opciones: [
+        "ping",
+        "lsblk",
+        "nano",
+        "mkdir"
+    ],
+    correcta: 1,
+    explicacion: "lsblk muestra discos y particiones."
+},
+
+{
+    pregunta: "¿Qué comando muestra el espacio usado en discos Linux?",
+    opciones: [
+        "ls",
+        "fdisk",
+        "df",
+        "pwd"
+    ],
+    correcta: 2,
+    explicacion: "df muestra uso y espacio libre."
+},
+
+{
+    pregunta: "¿Qué significa RPM en un HDD?",
+    opciones: [
+        "Read Per Minute",
+        "Rotations Per Minute",
+        "Random Process Memory",
+        "Rapid Peripheral Mode"
+    ],
+    correcta: 1,
+    explicacion: "RPM indica las revoluciones por minuto."
+},
+
+{
+    pregunta: "¿Qué ocurre normalmente al aumentar las RPM de un HDD?",
+    opciones: [
+        "Aumenta la latencia",
+        "Disminuye el rendimiento",
+        "Disminuye la latencia",
+        "Reduce la capacidad"
+    ],
+    correcta: 2,
+    explicacion: "Más RPM reducen la latencia."
+},
+
+{
+    pregunta: "¿Qué conector USB suele utilizar impresoras?",
+    opciones: [
+        "Tipo A",
+        "Tipo B",
+        "Tipo C",
+        "Mini PCI"
+    ],
+    correcta: 1,
+    explicacion: "Las impresoras tradicionalmente usan USB Tipo B."
+},
+
+{
+    pregunta: "¿Qué interfaz antigua utilizaba configuración maestro-esclavo?",
+    opciones: [
+        "SATA",
+        "NVMe",
+        "IDE",
+        "SCSI"
+    ],
+    correcta: 2,
+    explicacion: "IDE/PATA utilizaba maestro y esclavo."
+},
+
+{
+    pregunta: "¿Qué significa PnP?",
+    opciones: [
+        "Plug and Play",
+        "Port and Peripheral",
+        "Primary Network Port",
+        "Plug new Peripheral"
+    ],
+    correcta: 0,
+    explicacion: "PnP significa Plug and Play."
+},
+
+{
+    pregunta: "¿Qué comando Linux permite particionar discos?",
+    opciones: [
+        "mkfs",
+        "fdisk",
+        "mount",
+        "nano"
+    ],
+    correcta: 1,
+    explicacion: "fdisk permite gestionar particiones."
+},
+
+{
+    pregunta: "¿Qué herramienta Windows permite gestionar particiones desde consola?",
+    opciones: [
+        "diskpart",
+        "format",
+        "services",
+        "eventvwr"
+    ],
+    correcta: 0,
+    explicacion: "diskpart administra discos y particiones."
+},
+
+{
+    pregunta: "¿Qué sistema de archivos es típico de Windows?",
+    opciones: [
+        "ext4",
+        "NTFS",
+        "swap",
+        "xfs"
+    ],
+    correcta: 1,
+    explicacion: "NTFS es el sistema de archivos principal de Windows."
+},
+
+{
+    pregunta: "¿Qué significa formatear una partición?",
+    opciones: [
+        "Eliminar físicamente el disco",
+        "Crear un sistema de archivos",
+        "Cambiar la BIOS",
+        "Aumentar la RAM"
+    ],
+    correcta: 1,
+    explicacion: "Formatear prepara una partición con un sistema de archivos."
+},
+
+{
+    pregunta: "¿Qué tipo de memoria usan los SSD?",
+    opciones: [
+        "Flash",
+        "Magnética",
+        "Óptica",
+        "Mecánica"
+    ],
+    correcta: 0,
+    explicacion: "Los SSD utilizan memoria flash."
+},
+
+{
+    pregunta: "¿Qué tipo de disco suele ser más rápido?",
+    opciones: [
+        "HDD",
+        "SSD NVMe",
+        "DVD",
+        "Blu-Ray"
+    ],
+    correcta: 1,
+    explicacion: "Los SSD NVMe son mucho más rápidos."
+},
+
+{
+    pregunta: "¿Qué tecnología se usa principalmente en centros de datos y servidores?",
+    opciones: [
+        "SAS",
+        "IDE",
+        "AGP",
+        "ISA"
+    ],
+    correcta: 0,
+    explicacion: "SAS está orientado a entornos profesionales."
+},
+
+{
+    pregunta: "¿Qué significa SATA?",
+    opciones: [
+        "Serial ATA",
+        "System ATA",
+        "Secure ATA",
+        "Secondary ATA"
+    ],
+    correcta: 0,
+    explicacion: "SATA significa Serial ATA."
+},
+
+{
+    pregunta: "¿Qué ventaja tiene SATA frente a PATA?",
+    opciones: [
+        "Mayor tamaño de cable",
+        "Mejor flujo de aire",
+        "Necesita jumpers",
+        "Menor velocidad"
+    ],
+    correcta: 1,
+    explicacion: "Los cables SATA son más pequeños y mejoran ventilación."
+},
+
+{
+    pregunta: "¿Qué componente almacena permanentemente la información?",
+    opciones: [
+        "RAM",
+        "CPU",
+        "Disco duro",
+        "Cache"
+    ],
+    correcta: 2,
+    explicacion: "El almacenamiento permanente se realiza en discos."
+},
+
+{
+    pregunta: "¿Qué tipo de almacenamiento usa discos ópticos?",
+    opciones: [
+        "Magnético",
+        "Flash",
+        "Láser",
+        "Mecánico"
+    ],
+    correcta: 2,
+    explicacion: "CD/DVD/Blu-Ray usan tecnología láser."
+},
+
+{
+    pregunta: "¿Qué utilidad tiene normalmente un puerto USB rojo?",
+    opciones: [
+        "USB 1.0",
+        "Carga rápida",
+        "Solo audio",
+        "PS/2"
+    ],
+    correcta: 1,
+    explicacion: "Muchos USB rojos soportan carga rápida."
+},
+
+{
+    pregunta: "¿Qué comando revisa puntos de montaje en Linux?",
+    opciones: [
+        "df y lsblk",
+        "ping",
+        "mkfs",
+        "nano"
+    ],
+    correcta: 0,
+    explicacion: "df y lsblk permiten revisar montajes."
+}
 ];
 
 let preguntasOriginales = [...preguntas];
