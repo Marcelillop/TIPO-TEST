@@ -731,20 +731,286 @@ let preguntasHardware = [
 }
 ];
 
+let preguntasRecuHardware = [
+{
+    pregunta: "Una nomenclatura abreviada para PCI Express es:",
+    opciones: ["PCI-E", "PCIe", "3GIO", "Todas las anteriores", "PCI-X"],
+    correcta: 3,
+    explicacion: "PCI Express también puede abreviarse como PCI-E, PCIe o 3GIO."
+},
+{
+    pregunta: "Número máximo de canales (lanes) en PCI Express:",
+    opciones: ["16", "32", "8", "2"],
+    correcta: 1,
+    explicacion: "PCI Express puede alcanzar hasta 32 lanes."
+},
+{
+    pregunta: "Ancho de banda para SATA 2:",
+    opciones: ["300 MB/seg", "3 GB/seg", "6 Gb/seg", "Ninguno"],
+    correcta: 0,
+    explicacion: "SATA II alcanza 300 MB/s."
+},
+{
+    pregunta: "Los conectores USB azules se asocian normalmente con:",
+    opciones: ["USB 1", "USB 2", "USB 3"],
+    correcta: 2,
+    explicacion: "El color azul identifica normalmente USB 3."
+},
+{
+    pregunta: "Subcomando de fdisk para verificar la tabla de particiones:",
+    opciones: ["p", "g", "v"],
+    correcta: 2,
+    explicacion: "El subcomando v verifica la tabla de particiones."
+},
+{
+    pregunta: "¿fdisk puede lanzarse sin argumentos?",
+    opciones: ["Verdadero", "Falso"],
+    correcta: 1,
+    explicacion: "fdisk necesita indicar el disco sobre el que trabajar."
+},
+{
+    pregunta: "En un HDD el tiempo de acceso se calcula como:",
+    opciones: [
+        "Tiempo de búsqueda + RPM",
+        "Tiempo de búsqueda + latencia",
+        "Tiempo de búsqueda + RPM + latencia",
+        "Tiempo de búsqueda + latencia + tiempo lectura/escritura"
+    ],
+    correcta: 3,
+    explicacion: "El tiempo de acceso incluye búsqueda, latencia y lectura/escritura."
+},
+{
+    pregunta: "Subcomando de diskpart para obtener información detallada de particiones:",
+    opciones: ["list volume", "list disk", "list partition"],
+    correcta: 0,
+    explicacion: "list volume muestra información detallada de volúmenes."
+},
+{
+    pregunta: "Conector USB reversible:",
+    opciones: ["Tipo A", "Tipo B", "Tipo C", "Ninguno"],
+    correcta: 2,
+    explicacion: "USB Tipo C es reversible."
+},
+{
+    pregunta: "¿Dónde anota mkntfs los bloques defectuosos?",
+    opciones: [
+        "Área de datos",
+        "Índice de la partición",
+        "Sector de arranque",
+        "Índice de la partición 1"
+    ],
+    correcta: 1,
+    explicacion: "Los bloques defectuosos quedan registrados en el índice NTFS."
+},
+{
+    pregunta: "En un HDD la latencia depende de:",
+    opciones: ["RPM", "Tiempo de búsqueda", "Tiempo de acceso", "Tiempo lectura/escritura"],
+    correcta: 0,
+    explicacion: "La latencia depende de las RPM."
+},
+{
+    pregunta: "Señala la afirmación correcta:",
+    opciones: [
+        "HDD presenta más ruido que SSD",
+        "NVMe significa Non Volatile Memory",
+        "SSD consume más energía que HDD",
+        "HDD es más fiable que SSD"
+    ],
+    correcta: 0,
+    explicacion: "Los HDD generan más ruido mecánico que los SSD."
+},
+{
+    pregunta: "Con fdisk podemos:",
+    opciones: [
+        "Crear tabla de particiones",
+        "Crear tabla y particionar",
+        "Crear tabla, particionar y formatear",
+        "Crear tabla, particionar, formatear y montar"
+    ],
+    correcta: 1,
+    explicacion: "fdisk permite crear tablas de particiones y particionar."
+},
+{
+    pregunta: "USB 3 es exclusivo de conectores Tipo C:",
+    opciones: ["Verdadero", "Falso"],
+    correcta: 1,
+    explicacion: "USB 3 también existe en Tipo A."
+},
+{
+    pregunta: "Orden correcto de preparación de disco en Windows:",
+    opciones: [
+        "Particionado, formateado, MBR/GPT",
+        "MBR/GPT, formateado, particionado",
+        "MBR/GPT, particionado, formateado",
+        "Particionado, MBR/GPT, formateado"
+    ],
+    correcta: 2,
+    explicacion: "Primero se establece MBR/GPT, luego particionado y finalmente formateo."
+},
+{
+    pregunta: "¿Qué orden permite formatear?",
+    opciones: ["parted", "fdisk", "diskpart", "Todas"],
+    correcta: 2,
+    explicacion: "diskpart permite gestionar y formatear discos."
+},
+{
+    pregunta: "¿Qué tipo de partición puede subdividirse?",
+    opciones: ["Primaria", "Extendida", "Lógica", "Todas"],
+    correcta: 1,
+    explicacion: "La partición extendida puede contener múltiples particiones lógicas."
+},
+{
+    pregunta: "¿Qué subdivisión aloja particiones lógicas?",
+    opciones: ["Primaria", "Extendida", "Cluster"],
+    correcta: 1,
+    explicacion: "Las particiones lógicas se crean dentro de una extendida."
+},
+{
+    pregunta: "¿Qué área se modifica durante el formateo?",
+    opciones: [
+        "Índice de la partición",
+        "Tabla de particiones",
+        "Ambas",
+        "Sector de arranque"
+    ],
+    correcta: 0,
+    explicacion: "El formateo modifica principalmente el índice/sistema de archivos."
+},
+{
+    pregunta: "¿Qué interfaz tiene mayor ancho de banda?",
+    opciones: ["PATA", "SATA", "SAS", "SCSI"],
+    correcta: 2,
+    explicacion: "SAS ofrece mayor rendimiento y ancho de banda."
+},
+{
+    pregunta: "En un HDD las RPM determinan:",
+    opciones: [
+        "Tiempo de búsqueda",
+        "Tiempo de acceso",
+        "Latencia",
+        "Tiempo acceso y latencia"
+    ],
+    correcta: 2,
+    explicacion: "Las RPM afectan directamente a la latencia."
+},
+{
+    pregunta: "La configuración maestro-esclavo pertenece a:",
+    opciones: ["IDE", "SAS", "SATA", "SCSI"],
+    correcta: 0,
+    explicacion: "IDE/PATA utilizaba configuración maestro-esclavo."
+},
+{
+    pregunta: "Señala la afirmación correcta:",
+    opciones: [
+        "Los disquetes de 3,5 almacenan más que los de 5,25",
+        "Los discos RW no admiten cambios",
+        "ATA usa cable más estrecho que SATA",
+        "Un HDD con 6 cabezales puede tener 2 platos"
+    ],
+    correcta: 0,
+    explicacion: "Los disquetes de 3,5 pulgadas almacenaban más capacidad."
+},
+{
+    pregunta: "Tecnología orientada a servidores:",
+    opciones: ["SCSI", "SAS", "Cintas de respaldo", "Todas"],
+    correcta: 3,
+    explicacion: "Todas las tecnologías mencionadas son comunes en servidores."
+},
+{
+    pregunta: "Latencia de un HDD de 2K RPM:",
+    opciones: ["20 ms", "15 ns", "15 ms", "20 ns"],
+    correcta: 2,
+    explicacion: "Un disco de 2000 RPM tiene una latencia aproximada de 15 ms."
+},
+{
+    pregunta: "Al grabar un archivo el sistema operativo lo divide en:",
+    opciones: ["Bytes", "Sectores", "Clusters", "Particiones"],
+    correcta: 2,
+    explicacion: "Los archivos se almacenan usando clusters."
+},
+{
+    pregunta: "Las conexiones hot swap se realizan con el equipo:",
+    opciones: ["Encendido", "Apagado", "Arrancando", "Apagándose"],
+    correcta: 0,
+    explicacion: "Hot swap significa conectar en caliente, con el sistema encendido."
+},
+{
+    pregunta: "Estilo de particionado recomendado:",
+    opciones: ["GUID Partition Table", "BIOS", "MBR", "UEFI"],
+    correcta: 0,
+    explicacion: "GPT es el estilo moderno recomendado."
+},
+{
+    pregunta: "En lsblk, ¿qué campo indica si el dispositivo es extraíble?",
+    opciones: ["TYPE", "RO", "MOUNTPOINTS", "RM"],
+    correcta: 3,
+    explicacion: "RM indica si el dispositivo es removible."
+},
+{
+    pregunta: "MTBF indica:",
+    opciones: [
+        "Durabilidad del hardware",
+        "Velocidad del hardware",
+        "Tamaño físico",
+        "Puerto o ranura"
+    ],
+    correcta: 0,
+    explicacion: "MTBF mide el tiempo medio entre fallos."
+},
+{
+    pregunta: "Campo de fstab relacionado con copias de seguridad:",
+    opciones: ["pass", "type", "dump", "options"],
+    correcta: 2,
+    explicacion: "El campo dump se relaciona con copias de seguridad."
+},
+{
+    pregunta: "¿Qué bus NO es Plug and Play?",
+    opciones: ["PCI", "VLB", "EISA"],
+    correcta: 1,
+    explicacion: "VLB no era Plug and Play."
+},
+{
+    pregunta: "¿Qué bus es de propósito específico?",
+    opciones: ["AGP", "EISA", "PCI", "PCI-E"],
+    correcta: 0,
+    explicacion: "AGP estaba diseñado específicamente para tarjetas gráficas."
+},
+{
+    pregunta: "¿Qué bus trabaja con anchos de 32 y 64 bits?",
+    opciones: ["AGP", "PCI-E", "PCI"],
+    correcta: 2,
+    explicacion: "PCI trabaja con buses de 32 y 64 bits."
+},
+{
+    pregunta: "¿Qué comandos permiten revisar puntos de montaje?",
+    opciones: ["df", "lsblk", "df y lsblk"],
+    correcta: 2,
+    explicacion: "Ambos comandos muestran información de montaje."
+}
+];
+
 let preguntasOriginales = [...preguntas];
 
 const bancosTests = [
     {
         nombre: "Bases de Datos",
+        clave: "basesdedatos",
         preguntas: preguntasOriginales
     },
     {
         nombre: "Hardware",
+        clave: "hardware",
         preguntas: preguntasHardware
     },
     {
         nombre: "Windows Server",
+        clave: "windowsserver",
         preguntas: preguntasWindowsServer
+    },
+    {
+        nombre: "Recu Hardware",
+        clave: "recuhardware",
+        preguntas: preguntasRecuHardware
     }
 ];
 
@@ -845,11 +1111,11 @@ function iniciarNuevoTest() {
 
     const bancoActual = bancosTests[testSeleccionado].preguntas;
 
-  if (modoExamen) {
-    preguntas = mezclarPreguntas(bancoActual)
-        .slice(0, Math.min(20, bancoActual.length))
-        .map(pregunta => mezclarOpciones(pregunta));
-      }else {
+    if (modoExamen) {
+        preguntas = mezclarPreguntas(bancoActual)
+            .slice(0, Math.min(20, bancoActual.length))
+            .map(pregunta => mezclarOpciones(pregunta));
+    } else {
         preguntas = modoRandom
             ? mezclarPreguntas(bancoActual)
             : [...bancoActual];
@@ -881,9 +1147,7 @@ function mostrarPregunta() {
 
     const actual = preguntas[indiceActual];
 
-    progreso.textContent =
-        `Pregunta ${indiceActual + 1} de ${preguntas.length}`;
-
+    progreso.textContent = `Pregunta ${indiceActual + 1} de ${preguntas.length}`;
     pregunta.textContent = actual.pregunta;
 
     actual.opciones.forEach((opcion, index) => {
@@ -892,13 +1156,9 @@ function mostrarPregunta() {
         boton.textContent = opcion;
 
         if (modoExamen) {
-            boton.addEventListener("click", () =>
-                seleccionarOpcion(index)
-            );
+            boton.addEventListener("click", () => seleccionarOpcion(index));
         } else {
-            boton.addEventListener("click", () =>
-                responderNormal(index)
-            );
+            boton.addEventListener("click", () => responderNormal(index));
         }
 
         opciones.appendChild(boton);
@@ -919,14 +1179,10 @@ function responderNormal(index) {
 function seleccionarOpcion(index) {
     const botones = opciones.querySelectorAll("button");
 
-    botones.forEach(btn =>
-        btn.classList.remove("seleccionada")
-    );
-
+    botones.forEach(btn => btn.classList.remove("seleccionada"));
     botones[index].classList.add("seleccionada");
 
     respuestaSeleccionada = index;
-
     btnSiguiente.style.display = "block";
 }
 
@@ -939,7 +1195,6 @@ function corregirRespuesta() {
         puntaje++;
     } else {
         fallos++;
-
         historialFallos.push({
             pregunta: actual.pregunta,
             correcta: actual.opciones[correcta]
@@ -967,27 +1222,23 @@ function corregirRespuesta() {
 function calcularNota() {
     const total = preguntas.length;
     const valorPregunta = 10 / total;
-
     const penalizacionPorFallos = Math.floor(fallos / 3) * valorPregunta;
-
     const notaBase = puntaje * valorPregunta;
 
     return Math.max(0, notaBase - penalizacionPorFallos);
 }
 
-function obtenerClaveHistorialPorIndice(indice) {
-    const nombre = bancosTests[indice].nombre
-        .toLowerCase()
-        .replace(/\s+/g, "");
+function obtenerClaveHistorial() {
+    return `historial_${bancosTests[testSeleccionado].clave}`;
+}
 
-    return `historial_${nombre}`;
+function obtenerClavePendiente() {
+    return `intentoPendiente_${bancosTests[testSeleccionado].clave}`;
 }
 
 function guardarIntento() {
-    const clave = obtenerClaveHistorialPorIndice(testSeleccionado);
-
-    const historial =
-        JSON.parse(localStorage.getItem(clave)) || [];
+    const clave = obtenerClaveHistorial();
+    const historial = JSON.parse(localStorage.getItem(clave)) || [];
 
     historial.push({
         fecha: new Date().toLocaleString(),
@@ -1003,8 +1254,6 @@ function guardarIntento() {
 }
 
 function guardarIntentoPendiente() {
-    const clavePendiente = `intentoPendiente_${testSeleccionado}`;
-
     const estado = {
         testSeleccionado,
         preguntas,
@@ -1017,18 +1266,11 @@ function guardarIntentoPendiente() {
         historialFallos
     };
 
-    localStorage.setItem(
-        clavePendiente,
-        JSON.stringify(estado)
-    );
+    localStorage.setItem(obtenerClavePendiente(), JSON.stringify(estado));
 }
 
 function cargarIntentoPendiente() {
-    const clavePendiente = `intentoPendiente_${testSeleccionado}`;
-
-    const estado = JSON.parse(
-    localStorage.getItem(clavePendiente)
-);
+    const estado = JSON.parse(localStorage.getItem(obtenerClavePendiente()));
 
     if (!estado) return;
 
@@ -1044,14 +1286,10 @@ function cargarIntentoPendiente() {
 
     actualizarSelectorTest();
 
-    btnRandom.textContent =
-        modoRandom ? "Modo random: ON" : "Modo random: OFF";
-
+    btnRandom.textContent = modoRandom ? "Modo random: ON" : "Modo random: OFF";
     btnRandom.classList.toggle("activo", modoRandom);
 
-    btnExamen.textContent =
-        modoExamen ? "Modo examen: ON" : "Modo examen: OFF";
-
+    btnExamen.textContent = modoExamen ? "Modo examen: ON" : "Modo examen: OFF";
     btnExamen.classList.toggle("activo", modoExamen);
 
     cronometro.textContent =
@@ -1061,6 +1299,12 @@ function cargarIntentoPendiente() {
     historialGlobal.style.display = "none";
     quizContainer.style.display = "block";
 
+    progreso.style.display = "block";
+    cronometro.style.display = "block";
+    pregunta.style.display = "block";
+    opciones.style.display = "grid";
+    explicacion.style.display = "none";
+    resultado.style.display = "none";
     btnSalir.style.display = "inline-block";
 
     iniciarCronometro();
@@ -1070,9 +1314,7 @@ function cargarIntentoPendiente() {
 function mostrarResultado() {
     clearInterval(intervaloCronometro);
 
-   localStorage.removeItem(
-    `intentoPendiente_${testSeleccionado}`
-    );
+    localStorage.removeItem(obtenerClavePendiente());
 
     guardarIntento();
 
@@ -1095,24 +1337,19 @@ function mostrarResultado() {
 }
 
 function cargarHistorial(tipoTest) {
-    let claveHistorial = "";
+    const claves = {
+        bd: "historial_basesdedatos",
+        hw: "historial_hardware",
+        ws: "historial_windowsserver",
+        rh: "historial_recuhardware"
+    };
 
-    if (tipoTest === "bd") {
-        claveHistorial = "historial_basesdedatos";
-    } else if (tipoTest === "hw") {
-        claveHistorial = "historial_hardware";
-    } else if (tipoTest === "ws") {
-        claveHistorial = "historial_windowsserver";
-    }
-
-    const historial =
-        JSON.parse(localStorage.getItem(claveHistorial)) || [];
+    const historial = JSON.parse(localStorage.getItem(claves[tipoTest])) || [];
 
     contenidoHistorial.innerHTML = "";
 
     if (historial.length === 0) {
-        contenidoHistorial.innerHTML =
-            "<p>No hay intentos guardados.</p>";
+        contenidoHistorial.innerHTML = "<p>No hay intentos guardados.</p>";
         return;
     }
 
@@ -1121,11 +1358,8 @@ function cargarHistorial(tipoTest) {
 
         let html = `
             <div class="intento">
-                <button
-                    class="btn-intento"
-                    onclick="toggleDetalles('${detallesId}')">
-                    Intento ${index + 1}
-                    ${intento.modoExamen ? "(Examen)" : ""}
+                <button class="btn-intento" onclick="toggleDetalles('${detallesId}')">
+                    Intento ${index + 1} ${intento.modoExamen ? "(Examen)" : ""}
                 </button>
 
                 <div id="${detallesId}" class="detalles-intento" style="display:none;">
@@ -1154,13 +1388,31 @@ function cargarHistorial(tipoTest) {
     });
 }
 
+function mostrarMenuHistorial() {
+    contenidoHistorial.innerHTML = `
+        <button onclick="cargarHistorial('bd')">
+            Historial Bases de Datos
+        </button>
+
+        <button onclick="cargarHistorial('hw')">
+            Historial Hardware
+        </button>
+
+        <button onclick="cargarHistorial('ws')">
+            Historial Windows Server
+        </button>
+
+        <button onclick="cargarHistorial('rh')">
+            Historial Recu Hardware
+        </button>
+    `;
+}
+
 function toggleDetalles(id) {
     const elemento = document.getElementById(id);
 
     elemento.style.display =
-        elemento.style.display === "none"
-            ? "block"
-            : "none";
+        elemento.style.display === "none" ? "block" : "none";
 }
 
 btnAnterior.addEventListener("click", () => {
@@ -1184,10 +1436,7 @@ btnSiguienteTest.addEventListener("click", () => {
 });
 
 btnIniciar.addEventListener("click", () => {
-    const pendiente =
-    localStorage.getItem(
-        `intentoPendiente_${testSeleccionado}`
-    );
+    const pendiente = localStorage.getItem(obtenerClavePendiente());
 
     if (pendiente) {
         modalPendiente.style.display = "flex";
@@ -1203,9 +1452,7 @@ btnContinuarPendiente.addEventListener("click", () => {
 });
 
 btnDescartarPendiente.addEventListener("click", () => {
-    localStorage.removeItem(
-    `intentoPendiente_${testSeleccionado}`
-    );
+    localStorage.removeItem(obtenerClavePendiente());
     modalPendiente.style.display = "none";
     iniciarNuevoTest();
 });
@@ -1213,18 +1460,14 @@ btnDescartarPendiente.addEventListener("click", () => {
 btnRandom.addEventListener("click", () => {
     modoRandom = !modoRandom;
 
-    btnRandom.textContent =
-        modoRandom ? "Modo random: ON" : "Modo random: OFF";
-
+    btnRandom.textContent = modoRandom ? "Modo random: ON" : "Modo random: OFF";
     btnRandom.classList.toggle("activo", modoRandom);
 });
 
 btnExamen.addEventListener("click", () => {
     modoExamen = !modoExamen;
 
-    btnExamen.textContent =
-        modoExamen ? "Modo examen: ON" : "Modo examen: OFF";
-
+    btnExamen.textContent = modoExamen ? "Modo examen: ON" : "Modo examen: OFF";
     btnExamen.classList.toggle("activo", modoExamen);
 });
 
@@ -1264,20 +1507,7 @@ btnMenu.addEventListener("click", () => {
 btnVerHistorial.addEventListener("click", () => {
     menuInicial.style.display = "none";
     historialGlobal.style.display = "block";
-
-   contenidoHistorial.innerHTML = `
-    <button onclick="cargarHistorial('bd')">
-        Historial Bases de Datos
-    </button>
-
-    <button onclick="cargarHistorial('hw')">
-        Historial Hardware
-    </button>
-
-    <button onclick="cargarHistorial('ws')">
-        Historial Windows Server
-    </button>
-`;
+    mostrarMenuHistorial();
 });
 
 btnVolverMenu.addEventListener("click", () => {
@@ -1289,21 +1519,11 @@ btnBorrarHistorial.addEventListener("click", () => {
     localStorage.removeItem("historial_basesdedatos");
     localStorage.removeItem("historial_hardware");
     localStorage.removeItem("historial_windowsserver");
+    localStorage.removeItem("historial_recuhardware");
 
-    contenidoHistorial.innerHTML = `
-        <button onclick="cargarHistorial('bd')">
-            Historial Bases de Datos
-        </button>
-
-        <button onclick="cargarHistorial('hw')">
-            Historial Hardware
-        </button>
-
-        <button onclick="cargarHistorial('ws')">
-            Historial Windows Server
-        </button>
-    `;
+    mostrarMenuHistorial();
 });
 
 actualizarSelectorTest();
 window.toggleDetalles = toggleDetalles;
+window.cargarHistorial = cargarHistorial;
