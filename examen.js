@@ -1,6 +1,6 @@
 let preguntas = [
       {
-        pregunta: "¿Qué elemento especial permite recorrer los registros de un fichero encadenado en un orden concreto?",
+        preglet preguntas = [unta: "¿Qué elemento especial permite recorrer los registros de un fichero encadenado en un orden concreto?",
         opciones: ["Índices", "Punteros", "Huecos", "Claves"],
         correcta: 1,
         explicacion: "Los punteros permiten enlazar registros y recorrerlos siguiendo un orden concreto."
@@ -1468,28 +1468,426 @@ let preguntasRecuHardware = [
 }
 ];
 
+
+let preguntasConfiguracionRed = [
+    {
+        pregunta: "¿Qué herramienta se utiliza normalmente para configurar la red en modo gráfico en Linux?",
+        opciones: ["NetworkManager", "iptables", "sysctl", "ss"],
+        correcta: 0,
+        explicacion: "El documento distingue NetworkManager como la opción habitual de configuración gráfica de red."
+    },
+    {
+        pregunta: "¿Qué comando permite consultar los mensajes del kernel relacionados con interfaces Ethernet?",
+        opciones: ["lsmod | grep eth", "dmesg | grep eth", "ip route show", "ss -ltn"],
+        correcta: 1,
+        explicacion: "dmesg muestra mensajes del kernel y se puede filtrar con grep eth para localizar los relacionados con Ethernet."
+    },
+    {
+        pregunta: "¿Qué comando permite comprobar si un módulo del kernel está cargado?",
+        opciones: ["lsmod", "ifup", "route", "hostname"],
+        correcta: 0,
+        explicacion: "lsmod muestra los módulos que están cargados actualmente en el kernel."
+    },
+    {
+        pregunta: "Según el documento, ¿qué herramientas antiguas están hoy en desuso para configurar la red?",
+        opciones: ["ip y ss", "ifconfig y route", "netplan y networkd", "sysctl e iptables"],
+        correcta: 1,
+        explicacion: "ifconfig y route pertenecen a net-tools y han sido sustituidos principalmente por herramientas de iproute2."
+    },
+    {
+        pregunta: "¿Qué comando moderno sustituye gran parte de las funciones de ifconfig, route y arp?",
+        opciones: ["ip", "ss", "netplan", "systemctl"],
+        correcta: 0,
+        explicacion: "El comando ip de iproute2 reúne funciones de direccionamiento, interfaces, rutas y vecindad."
+    },
+    {
+        pregunta: "¿Qué inconveniente tienen los cambios de red realizados directamente con comandos como ip?",
+        opciones: ["Solo funcionan con IPv6", "Se pierden al reiniciar si no se hacen persistentes", "No permiten configurar rutas", "Necesitan siempre NetworkManager"],
+        correcta: 1,
+        explicacion: "La configuración de bajo nivel no se mantiene tras reiniciar salvo que se guarde en la configuración persistente."
+    },
+    {
+        pregunta: "¿Qué comando antiguo muestra únicamente las interfaces de red activas?",
+        opciones: ["ifconfig", "ifconfig -a", "ip neigh show", "route -n"],
+        correcta: 0,
+        explicacion: "ifconfig muestra las interfaces activas; ifconfig -a incluye también las inactivas."
+    },
+    {
+        pregunta: "¿Qué opción de ifconfig muestra también las interfaces inactivas?",
+        opciones: ["-s", "-n", "-a", "-r"],
+        correcta: 2,
+        explicacion: "ifconfig -a lista todas las interfaces, tanto activas como inactivas."
+    },
+    {
+        pregunta: "¿Qué comando muestra estadísticas resumidas de tráfico por interfaz con ifconfig?",
+        opciones: ["ifconfig -s", "ifconfig -r", "ifconfig -n", "ifconfig -m"],
+        correcta: 0,
+        explicacion: "ifconfig -s presenta un resumen de paquetes enviados, recibidos y errores por interfaz."
+    },
+    {
+        pregunta: "¿Qué comando moderno muestra las interfaces y su estado a nivel de enlace?",
+        opciones: ["ip link show", "ip route show", "ip neigh show", "ss -s"],
+        correcta: 0,
+        explicacion: "ip link show permite consultar el estado de las interfaces físicas o lógicas."
+    },
+    {
+        pregunta: "¿Qué comando muestra las direcciones IP asignadas a las interfaces?",
+        opciones: ["ip address show", "ip route add", "ip link set", "ip neigh del"],
+        correcta: 0,
+        explicacion: "ip address show, también abreviado como ip a, muestra el direccionamiento IPv4 e IPv6."
+    },
+    {
+        pregunta: "¿Cuál es la abreviatura habitual de 'ip address show'?",
+        opciones: ["ip r", "ip n", "ip a", "ip l"],
+        correcta: 2,
+        explicacion: "El documento indica que ip a equivale a ip address show."
+    },
+    {
+        pregunta: "¿Qué comando activa la interfaz eth0 con iproute2?",
+        opciones: ["ip link set eth0 up", "ip addr add eth0 up", "ip route eth0 up", "ip neigh eth0 up"],
+        correcta: 0,
+        explicacion: "Para levantar una interfaz se utiliza ip link set <interfaz> up."
+    },
+    {
+        pregunta: "¿Qué comando desactiva la interfaz eth0 con iproute2?",
+        opciones: ["ip link set eth0 stop", "ip link set eth0 down", "ip addr del eth0", "ifdown -a eth0"],
+        correcta: 1,
+        explicacion: "Para bajar una interfaz se utiliza ip link set <interfaz> down."
+    },
+    {
+        pregunta: "¿Cuál es la sintaxis correcta para añadir 192.168.0.2/24 a eth0?",
+        opciones: ["ip address add 192.168.0.2/24 dev eth0", "ip route add 192.168.0.2/24 eth0", "ip link add eth0 192.168.0.2", "ifup 192.168.0.2 eth0"],
+        correcta: 0,
+        explicacion: "ip address add DIRECCION/PREFIJO dev INTERFAZ asigna una dirección a una interfaz."
+    },
+    {
+        pregunta: "¿Qué comando elimina 192.168.0.2/24 de eth0?",
+        opciones: ["ip address remove 192.168.0.2/24 eth0", "ip address del 192.168.0.2/24 dev eth0", "ip link del 192.168.0.2/24", "route del 192.168.0.2/24"],
+        correcta: 1,
+        explicacion: "Con ip se sustituye add por del para eliminar una dirección configurada."
+    },
+    {
+        pregunta: "¿Qué ocurre si se añade una nueva IP con ip sin borrar previamente la anterior?",
+        opciones: ["La nueva reemplaza automáticamente a la anterior", "La interfaz queda desactivada", "Pueden quedar dos direcciones asignadas", "Se reinicia NetworkManager"],
+        correcta: 2,
+        explicacion: "El documento advierte que hay que borrar la IP anterior si se quiere cambiarla para no dejar dos direcciones asignadas."
+    },
+    {
+        pregunta: "¿Qué fichero tradicional se utiliza para definir configuraciones persistentes de interfaces en sistemas con networking?",
+        opciones: ["/etc/hostname", "/etc/network/interfaces", "/etc/sysctl.conf", "/etc/iptables/rules.v4"],
+        correcta: 1,
+        explicacion: "/etc/network/interfaces contiene las definiciones lógicas y la configuración de interfaces del sistema networking."
+    },
+    {
+        pregunta: "¿Qué palabra en /etc/network/interfaces indica interfaces que se activarán automáticamente al arrancar?",
+        opciones: ["iface", "auto", "mapping", "static"],
+        correcta: 1,
+        explicacion: "Las líneas auto especifican interfaces que se levantarán automáticamente mediante ifup -a durante el arranque."
+    },
+    {
+        pregunta: "¿Qué directiva activa una interfaz cuando se produce un evento como detectar la tarjeta o conectar el cable?",
+        opciones: ["allow-hotplug", "allow-static", "auto-route", "post-up"],
+        correcta: 0,
+        explicacion: "allow-hotplug relaciona la activación de la interfaz con eventos hotplug."
+    },
+    {
+        pregunta: "¿Qué tipo de línea de /etc/network/interfaces define un nombre lógico y su configuración?",
+        opciones: ["mapping", "iface", "auto", "allow-auto"],
+        correcta: 1,
+        explicacion: "Las líneas iface definen el nombre lógico, la familia de direcciones y el método de configuración."
+    },
+    {
+        pregunta: "En 'iface eth0 inet static', ¿qué indica 'inet'?",
+        opciones: ["Interfaz interna", "Configuración IPv4", "IP dinámica", "Interfaz Ethernet"],
+        correcta: 1,
+        explicacion: "inet corresponde a la familia de direcciones IPv4; inet6 se utiliza para IPv6."
+    },
+    {
+        pregunta: "¿Qué método de una línea iface se utiliza para asignar una IP fija?",
+        opciones: ["loopback", "dhcp", "static", "manual-route"],
+        correcta: 2,
+        explicacion: "El método static se usa para definir una configuración IPv4 fija."
+    },
+    {
+        pregunta: "¿Qué método de una línea iface se utiliza para obtener una IP de forma dinámica?",
+        opciones: ["dynamic", "dhcp", "auto", "hotplug"],
+        correcta: 1,
+        explicacion: "El método dhcp indica que la interfaz obtendrá su configuración dinámicamente."
+    },
+    {
+        pregunta: "¿Qué dos líneas se indican como básicas para la interfaz loopback en /etc/network/interfaces?",
+        opciones: ["auto lo / iface lo inet loopback", "auto eth0 / iface lo inet static", "allow lo / iface lo inet dhcp", "loopback lo / address 127.0.0.1"],
+        correcta: 0,
+        explicacion: "El documento indica auto lo e iface lo inet loopback como las líneas básicas de la interfaz local."
+    },
+    {
+        pregunta: "En una configuración static tradicional, ¿qué opción establece la puerta de enlace?",
+        opciones: ["network", "broadcast", "gateway", "route"],
+        correcta: 2,
+        explicacion: "gateway define la puerta de enlace utilizada por la ruta por defecto."
+    },
+    {
+        pregunta: "¿Qué comando activa una interfaz usando /etc/network/interfaces?",
+        opciones: ["ifup", "ifquery", "ipup", "netup"],
+        correcta: 0,
+        explicacion: "ifup activa una interfaz física aplicando la configuración lógica correspondiente."
+    },
+    {
+        pregunta: "¿Qué comando desconfigura una interfaz gestionada por networking?",
+        opciones: ["ifquery", "ifdown", "linkdown", "netplan down"],
+        correcta: 1,
+        explicacion: "ifdown es el comando encargado de desconfigurar una interfaz."
+    },
+    {
+        pregunta: "¿Qué comando consulta las opciones de configuración de una interfaz?",
+        opciones: ["ifquery", "ifread", "route -q", "ip inspect"],
+        correcta: 0,
+        explicacion: "ifquery permite consultar la configuración de interfaces físicas o lógicas."
+    },
+    {
+        pregunta: "¿Cuál es el orden recomendado para modificar una interfaz gestionada por /etc/network/interfaces?",
+        opciones: ["Editar, ifdown, ifup", "ifup, editar, ifdown", "ifdown, editar, ifup", "Reiniciar, editar, ifquery"],
+        correcta: 2,
+        explicacion: "El documento indica: desactivar con ifdown, editar /etc/network/interfaces y volver a activar con ifup."
+    },
+    {
+        pregunta: "¿Dónde almacena Netplan sus archivos de configuración?",
+        opciones: ["/etc/network/*.conf", "/etc/netplan/*.yaml", "/var/netplan/*.ini", "/etc/sysctl.d/*.yaml"],
+        correcta: 1,
+        explicacion: "Netplan lee la configuración de los archivos YAML ubicados en /etc/netplan/."
+    },
+    {
+        pregunta: "¿En qué formato están escritos los archivos de Netplan?",
+        opciones: ["JSON", "XML", "YAML", "INI"],
+        correcta: 2,
+        explicacion: "Netplan utiliza archivos YAML."
+    },
+    {
+        pregunta: "¿Qué carácter de indentación no admite YAML según el documento?",
+        opciones: ["Espacios", "Tabulaciones", "Dos puntos", "Guiones"],
+        correcta: 1,
+        explicacion: "El documento remarca que YAML no admite tabulaciones y debe indentarse con espacios."
+    },
+    {
+        pregunta: "¿Qué renderer de Netplan se utiliza normalmente en entornos de escritorio gráficos?",
+        opciones: ["networkd", "NetworkManager", "iptables", "iproute2"],
+        correcta: 1,
+        explicacion: "NetworkManager se plantea como renderer habitual para entornos de escritorio gráficos."
+    },
+    {
+        pregunta: "¿Qué renderer de Netplan se utiliza normalmente en servidores o configuración manual?",
+        opciones: ["NetworkManager", "networkd", "net-tools", "dhclient"],
+        correcta: 1,
+        explicacion: "systemd-networkd, indicado como networkd en Netplan, se usa habitualmente en servidores o configuración manual."
+    },
+    {
+        pregunta: "En Netplan, ¿qué valor activa DHCP para IPv4?",
+        opciones: ["dhcp4: true", "ipv4: dhcp", "dhcp: ipv4", "addresses: dhcp"],
+        correcta: 0,
+        explicacion: "La clave dhcp4: true habilita la configuración IPv4 mediante DHCP."
+    },
+    {
+        pregunta: "¿Qué comando de Netplan genera la configuración para los renderizadores sin aplicarla?",
+        opciones: ["netplan generate", "netplan apply", "netplan try", "netplan build"],
+        correcta: 0,
+        explicacion: "netplan generate procesa /etc/netplan y genera la configuración necesaria para el backend."
+    },
+    {
+        pregunta: "¿Qué comando aplica la configuración de Netplan?",
+        opciones: ["netplan commit", "netplan apply", "netplan start", "netplan reload-only"],
+        correcta: 1,
+        explicacion: "netplan apply aplica toda la configuración y reinicia los renderizadores cuando es necesario."
+    },
+    {
+        pregunta: "¿Qué ventaja tiene 'netplan try'?",
+        opciones: ["Borra la configuración anterior", "Aplica la configuración y permite revertir si no se confirma", "Solo muestra las interfaces", "Convierte YAML a JSON"],
+        correcta: 1,
+        explicacion: "netplan try aplica temporalmente la configuración y revierte si la red queda rota o no se confirma."
+    },
+    {
+        pregunta: "En una máquina con varias interfaces DHCP, ¿qué valor de route-metric se prefiere?",
+        opciones: ["El más alto", "El más bajo", "Siempre 0", "No influye"],
+        correcta: 1,
+        explicacion: "El documento indica que una métrica de ruta más baja hace que esa ruta sea preferida."
+    },
+    {
+        pregunta: "¿Qué paquete de herramientas modernas reemplaza a net-tools?",
+        opciones: ["iproute2", "netplan-tools", "iptables-persistent", "network-manager-cli"],
+        correcta: 0,
+        explicacion: "iproute2 sustituye a gran parte de las herramientas tradicionales de net-tools."
+    },
+    {
+        pregunta: "Dentro del comando ip, ¿qué objeto se usa para gestionar la tabla ARP o vecinos?",
+        opciones: ["address", "neighbour", "route", "tunnel"],
+        correcta: 1,
+        explicacion: "El objeto neighbour permite consultar y gestionar los enlaces de vecindad, incluida la tabla ARP."
+    },
+    {
+        pregunta: "¿Qué comando moderno muestra la tabla ARP o de vecinos?",
+        opciones: ["ip neigh show", "ip link arp", "ip route arp", "ss -arp"],
+        correcta: 0,
+        explicacion: "ip neigh show es el equivalente moderno para consultar las entradas de vecindad/ARP."
+    },
+    {
+        pregunta: "¿Qué comando muestra la tabla de rutas actual?",
+        opciones: ["ip route show", "ip link show", "ip addr list", "ip neigh list"],
+        correcta: 0,
+        explicacion: "ip route show o ip route list muestran la tabla de enrutamiento principal."
+    },
+    {
+        pregunta: "¿Cuál es la sintaxis correcta para añadir una ruta a 10.8.0.0/24 vía 192.168.1.2 por eth0?",
+        opciones: ["ip route add 10.8.0.0/24 via 192.168.1.2 dev eth0", "ip addr add 10.8.0.0/24 gateway 192.168.1.2", "route ip 10.8.0.0/24 eth0 192.168.1.2", "ip link route 10.8.0.0/24 eth0"],
+        correcta: 0,
+        explicacion: "ip route add RED via GATEWAY dev INTERFAZ añade una ruta estática a la tabla."
+    },
+    {
+        pregunta: "¿Cómo se añade una puerta de enlace predeterminada con iproute2?",
+        opciones: ["ip route add default via 192.168.1.1 dev eth0", "ip addr gateway 192.168.1.1 eth0", "ip link set default 192.168.1.1", "route default eth0 only"],
+        correcta: 0,
+        explicacion: "La ruta por defecto se añade con ip route add default via <gateway> dev <interfaz>."
+    },
+    {
+        pregunta: "¿Qué herramienta moderna sustituye en gran medida a netstat?",
+        opciones: ["ss", "lsmod", "sysctl", "ifquery"],
+        correcta: 0,
+        explicacion: "ss muestra estadísticas e información sobre sockets y conexiones, de forma similar a netstat."
+    },
+    {
+        pregunta: "¿Qué comando muestra sockets TCP a la escucha sin resolver nombres?",
+        opciones: ["ss -ltn", "ss -s", "ip -ltn", "netplan -ltn"],
+        correcta: 0,
+        explicacion: "ss -ltn lista sockets TCP en escucha y usa salida numérica."
+    },
+    {
+        pregunta: "¿Qué comando lista puertos en escucha junto con el PID del proceso?",
+        opciones: ["ss -tlnp", "ss -s", "ip route -p", "ifconfig -p"],
+        correcta: 0,
+        explicacion: "ss -tlnp muestra sockets TCP en escucha e incluye información del proceso."
+    },
+    {
+        pregunta: "¿Qué comando muestra un resumen del estado de los sockets?",
+        opciones: ["ss -s", "ss -r", "ip sockets", "netstat --summary-only"],
+        correcta: 0,
+        explicacion: "ss -s ofrece un resumen del estado de los sockets."
+    },
+    {
+        pregunta: "¿Qué fichero establece el nombre local del equipo?",
+        opciones: ["/etc/hostname", "/etc/hosts.allow", "/etc/network/name", "/etc/sysctl.conf"],
+        correcta: 0,
+        explicacion: "/etc/hostname contiene el nombre del equipo que se lee durante el arranque."
+    },
+    {
+        pregunta: "¿Qué parámetro del kernel debe valer 1 para que Linux pueda reenviar paquetes IPv4?",
+        opciones: ["net.ipv4.ip_forward", "net.ipv4.route_enable", "net.forward.ipv4", "kernel.ip_route"],
+        correcta: 0,
+        explicacion: "net.ipv4.ip_forward=1 habilita el reenvío de paquetes IPv4 y permite que el equipo actúe como router."
+    },
+    {
+        pregunta: "¿En qué fichero puede hacerse persistente net.ipv4.ip_forward?",
+        opciones: ["/etc/sysctl.conf", "/etc/hostname", "/etc/netplan/routes.yaml", "/etc/iptables/rules.v4 solamente"],
+        correcta: 0,
+        explicacion: "El documento utiliza /etc/sysctl.conf para mantener el parámetro ip_forward entre reinicios."
+    },
+    {
+        pregunta: "¿Qué comando cambia temporalmente ip_forward a 1 sin reiniciar?",
+        opciones: ["sysctl -w net.ipv4.ip_forward=1", "ip route forward=1", "netplan forward true", "ss --forward 1"],
+        correcta: 0,
+        explicacion: "sysctl -w modifica el parámetro en caliente, aunque el cambio no es persistente por sí solo."
+    },
+    {
+        pregunta: "¿Qué comando carga los parámetros definidos en /etc/sysctl.conf?",
+        opciones: ["sysctl -p", "sysctl -a", "sysctl -w", "systemctl sysctl"],
+        correcta: 0,
+        explicacion: "sysctl -p carga los parámetros del fichero /etc/sysctl.conf."
+    },
+    {
+        pregunta: "Antes de realizar NAT, ¿qué capacidad debe estar habilitada en el equipo Linux?",
+        opciones: ["El modo promiscuo", "El reenvío de paquetes (forwarding)", "Una interfaz virtual", "SSH"],
+        correcta: 1,
+        explicacion: "El documento indica que para hacer NAT primero el equipo tiene que enrutar, por lo que debe estar habilitado ip_forward."
+    },
+    {
+        pregunta: "¿En qué cadena de la tabla nat se realiza normalmente SNAT para tráfico que sale a Internet?",
+        opciones: ["PREROUTING", "INPUT", "POSTROUTING", "FORWARD"],
+        correcta: 2,
+        explicacion: "SNAT se aplica en POSTROUTING, justo antes de que el paquete salga por la interfaz externa."
+    },
+    {
+        pregunta: "¿Qué objetivo de iptables se recomienda cuando la IP pública de salida es fija?",
+        opciones: ["DNAT", "SNAT", "MASQUERADE siempre", "REDIRECT"],
+        correcta: 1,
+        explicacion: "Para una IP pública estática, el documento recomienda SNAT indicando explícitamente la IP de origen traducida."
+    },
+    {
+        pregunta: "¿Qué objetivo de iptables se utiliza cuando la IP pública de salida es dinámica?",
+        opciones: ["SNAT --to fijo", "MASQUERADE", "DNAT", "ACCEPT"],
+        correcta: 1,
+        explicacion: "MASQUERADE usa automáticamente la dirección que tenga la interfaz de salida y es adecuado para IP pública dinámica."
+    },
+    {
+        pregunta: "¿En qué cadena se realiza DNAT para modificar el destino antes de decidir el enrutamiento?",
+        opciones: ["POSTROUTING", "PREROUTING", "OUTPUT solamente", "INPUT"],
+        correcta: 1,
+        explicacion: "DNAT de tráfico entrante se realiza en PREROUTING para que el encaminamiento se decida usando el nuevo destino."
+    },
+    {
+        pregunta: "En una regla DNAT para publicar un servidor web interno, ¿qué parámetro selecciona el puerto TCP de destino?",
+        opciones: ["--sport", "--dport", "--to-source", "-o"],
+        correcta: 1,
+        explicacion: "--dport especifica el puerto de destino, por ejemplo 80 para HTTP."
+    },
+    {
+        pregunta: "¿Qué paquete permite hacer persistentes reglas de iptables en Debian/Ubuntu según el documento?",
+        opciones: ["iptables-persistent", "netfilter-ui", "route-persistent", "iproute-save"],
+        correcta: 0,
+        explicacion: "El documento propone instalar iptables-persistent para conservar las reglas configuradas."
+    },
+    {
+        pregunta: "¿En qué fichero se guardan las reglas IPv4 persistentes de iptables indicadas en el documento?",
+        opciones: ["/etc/iptables/rules.v4", "/etc/network/iptables.conf", "/var/lib/iptables.v4", "/etc/netplan/iptables.yaml"],
+        correcta: 0,
+        explicacion: "Las reglas IPv4 persistentes se almacenan en /etc/iptables/rules.v4."
+    },
+    {
+        pregunta: "¿Qué servicio se utiliza para recargar las reglas persistentes de netfilter?",
+        opciones: ["netfilter-persistent.service", "networking-iptables.service", "iptables-daemon.service", "netplan.service"],
+        correcta: 0,
+        explicacion: "El documento utiliza netfilter-persistent.service para gestionar y recargar las reglas persistentes."
+    }
+];
+
 let preguntasOriginales = [...preguntas];
 
 const bancosTests = [
     {
         nombre: "Bases de Datos",
         clave: "basesdedatos",
+        descripcion: "Ficheros, SGBD, modelos y arquitectura de bases de datos",
         preguntas: preguntasOriginales
     },
     {
         nombre: "Hardware",
         clave: "hardware",
+        descripcion: "Componentes, almacenamiento, periféricos y fundamentos de hardware",
         preguntas: preguntasHardware
     },
     {
         nombre: "Windows Server",
         clave: "windowsserver",
+        descripcion: "Roles, Active Directory y administración de Windows Server",
         preguntas: preguntasWindowsServer
     },
     {
         nombre: "Recu Hardware",
         clave: "recuhardware",
+        descripcion: "Repaso y recuperación de contenidos de hardware",
         preguntas: preguntasRecuHardware
+    },
+    {
+        nombre: "Configuración de red",
+        clave: "configuracionred",
+        descripcion: "Linux · iproute2 · Netplan · routing · NAT · iptables",
+        preguntas: preguntasConfiguracionRed
     }
 ];
 
@@ -1497,6 +1895,8 @@ const btnAnterior = document.getElementById("btn-anterior");
 const btnSiguienteTest = document.getElementById("btn-siguiente-test");
 const nombreTest = document.getElementById("nombre-test");
 const cantidadPreguntas = document.getElementById("cantidad-preguntas");
+const descripcionTest = document.getElementById("descripcion-test");
+const testCard = document.getElementById("test-card");
 
 let testSeleccionado = 0;
 
@@ -1543,6 +1943,8 @@ function actualizarSelectorTest() {
     const test = bancosTests[testSeleccionado];
     nombreTest.textContent = test.nombre;
     cantidadPreguntas.textContent = `${test.preguntas.length} preguntas`;
+    descripcionTest.textContent = test.descripcion || "";
+    testCard.dataset.test = test.clave;
 }
 
 function mezclarPreguntas(array) {
@@ -1815,25 +2217,25 @@ function mostrarResultado() {
     `;
 }
 
-function cargarHistorial(tipoTest) {
-    const claves = {
-        bd: "historial_basesdedatos",
-        hw: "historial_hardware",
-        ws: "historial_windowsserver",
-        rh: "historial_recuhardware"
-    };
+function cargarHistorial(claveTest) {
+    const test = bancosTests.find(banco => banco.clave === claveTest);
 
-    const historial = JSON.parse(localStorage.getItem(claves[tipoTest])) || [];
+    if (!test) {
+        contenidoHistorial.innerHTML = "<p>No se ha encontrado este test.</p>";
+        return;
+    }
 
-    contenidoHistorial.innerHTML = "";
+    const historial = JSON.parse(localStorage.getItem(`historial_${test.clave}`)) || [];
+
+    contenidoHistorial.innerHTML = `<h3>Historial: ${test.nombre}</h3>`;
 
     if (historial.length === 0) {
-        contenidoHistorial.innerHTML = "<p>No hay intentos guardados.</p>";
+        contenidoHistorial.innerHTML += "<p>No hay intentos guardados.</p>";
         return;
     }
 
     historial.forEach((intento, index) => {
-        const detallesId = `detalles-${tipoTest}-${index}`;
+        const detallesId = `detalles-${test.clave}-${index}`;
 
         let html = `
             <div class="intento">
@@ -1849,7 +2251,7 @@ function cargarHistorial(tipoTest) {
                     Nota: ${intento.nota}/10
         `;
 
-        intento.errores.forEach(error => {
+        (intento.errores || []).forEach(error => {
             html += `
                 <div class="error-item">
                     ${error.pregunta}<br>
@@ -1868,23 +2270,11 @@ function cargarHistorial(tipoTest) {
 }
 
 function mostrarMenuHistorial() {
-    contenidoHistorial.innerHTML = `
-        <button onclick="cargarHistorial('bd')">
-            Historial Bases de Datos
+    contenidoHistorial.innerHTML = bancosTests.map(test => `
+        <button class="historial-test-btn" onclick="cargarHistorial('${test.clave}')">
+            Historial ${test.nombre}
         </button>
-
-        <button onclick="cargarHistorial('hw')">
-            Historial Hardware
-        </button>
-
-        <button onclick="cargarHistorial('ws')">
-            Historial Windows Server
-        </button>
-
-        <button onclick="cargarHistorial('rh')">
-            Historial Recu Hardware
-        </button>
-    `;
+    `).join("");
 }
 
 function toggleDetalles(id) {
@@ -1995,10 +2385,9 @@ btnVolverMenu.addEventListener("click", () => {
 });
 
 btnBorrarHistorial.addEventListener("click", () => {
-    localStorage.removeItem("historial_basesdedatos");
-    localStorage.removeItem("historial_hardware");
-    localStorage.removeItem("historial_windowsserver");
-    localStorage.removeItem("historial_recuhardware");
+    bancosTests.forEach(test => {
+        localStorage.removeItem(`historial_${test.clave}`);
+    });
 
     mostrarMenuHistorial();
 });
