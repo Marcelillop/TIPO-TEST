@@ -3,20 +3,86 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Test Bases de Datos</title>
+    <title>Tests de Informática</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <div id="menu-inicial">
     <h1>Selecciona un Test</h1>
+    <p class="subtitulo-menu">Elige el tema y practica en modo normal, random o examen.</p>
 
     <div id="selector-test">
         <button type="button" id="btn-anterior">◀</button>
+<!DOCTYPE html>
+        <button type="button" id="btn-siguiente-test">▶</button>
+    </div>
 
-        <div id="test-card">
+    <button type="button" id="btn-random">Modo random: OFF</button>
+    <button type="button" id="btn-examen">Modo examen: OFF</button>
+    <button type="button" id="btn-iniciar">Iniciar Test</button>
+    <button type="button" id="btn-ver-historial">Historial de intentos</button>
+</div>
+
+<div id="quiz-container" style="display:none;">
+    <p id="progreso"></p>
+    <p id="cronometro">Tiempo: 00:00</p>
+
+    <h2 id="pregunta"></h2>
+
+    <div id="opciones"></div>
+
+    <div id="explicacion" style="display:none;"></div>
+
+    <button type="button" id="btn-siguiente" style="display:none;">Siguiente</button>
+    <button type="button" id="btn-salir">Volver al menú</button>
+
+    <div id="resultado" style="display:none;">
+        <p id="puntaje-final"></p>
+        <button type="button" id="btn-menu">Volver al menú</button>
+    </div>
+</div>
+</div>
+
+<div id="historial-global" style="display:none;">
+    <h2>Historial de intentos</h2>
+    <div id="contenido-historial"></div>
+
+    <button type="button" id="btn-borrar-historial">Borrar historial</button>
+    <button type="button" id="btn-volver-menu">Volver al menú</button>
+</div>
+
+<div id="modal-pendiente" class="modal" style="display:none;">
+    <div class="modal-contenido">
+        <h2>Intento pendiente</h2>
+
+        <p>
+            Hay un test sin terminar guardado.
+            ¿Quieres continuarlo o empezar uno nuevo?
+        </p>
+
+        <div class="modal-botones">
+            <button type="button" id="btn-continuar-pendiente">
+                Continuar
+            </button>
+
+            <button type="button" id="btn-descartar-pendiente">
+                Empezar de nuevo
+            </button>
+        </div>
+    </div>
+</div>
+
+<script src="examen.js"></script>
+
+</body>
+</html>
+
+        <div id="test-card" data-test="basesdedatos">
+            <span class="test-badge">Tema</span>
             <h2 id="nombre-test">Bases de Datos</h2>
             <p id="cantidad-preguntas">50 preguntas</p>
+            <p id="descripcion-test">Ficheros, SGBD, modelos y arquitectura de bases de datos</p>
         </div>
 
         <button type="button" id="btn-siguiente-test">▶</button>
@@ -45,7 +111,6 @@
         <p id="puntaje-final"></p>
         <button type="button" id="btn-menu">Volver al menú</button>
     </div>
-</div>
 </div>
 
 <div id="historial-global" style="display:none;">
